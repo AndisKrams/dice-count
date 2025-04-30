@@ -32,6 +32,9 @@ Website is deployed here: <https://andiskrams.github.io//>
 
 ## Testing
 
+Uncaught ReferenceError: $ is not defined
+    at script.js:1:1
+
 ### Manual
 
 

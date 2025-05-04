@@ -10,12 +10,12 @@ $( document ).ready(function() {
 
     console.log(dice1, dice2, dice3, dice4, dice5, dice6);
    
-    $("#dice1").attr("src", "assets/images/dice" + dice1 + ".png");
-    $("#dice2").attr("src", "assets/images/dice" + dice2 + ".png");
-    $("#dice3").attr("src", "assets/images/dice" + dice3 + ".png");
-    $("#dice4").attr("src", "assets/images/dice" + dice4 + ".png");
-    $("#dice5").attr("src", "assets/images/dice" + dice5 + ".png");
-    $("#dice6").attr("src", "assets/images/dice" + dice6 + ".png");
+    $("#dice1").html('<img src="assets/images/dice' + dice1 + '.png">');
+    $("#dice2").html('<img src="assets/images/dice' + dice2 + '.png">');
+    $("#dice3").html('<img src="assets/images/dice' + dice3 + '.png">');
+    $("#dice4").html('<img src="assets/images/dice' + dice4 + '.png">');
+    $("#dice5").html('<img src="assets/images/dice' + dice5 + '.png">');
+    $("#dice6").html('<img src="assets/images/dice' + dice6 + '.png">');
 
     const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
 })});

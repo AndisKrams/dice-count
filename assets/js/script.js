@@ -18,10 +18,10 @@ $( document ).ready(function() {
     $("#dice6").html('<img src="assets/images/dice' + dice6 + '.png">');
 
     const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
-})});
-function displayDice() {
 
-};
+    $("#answer").value = "";
+    $("#answer").focus();
+})});
 
 function checkAnswer() {
 

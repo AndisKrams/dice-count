@@ -7,7 +7,7 @@ $( document ).ready(function() {
     const dice4 = Math.floor(Math.random() * 6) + 1;
     const dice5 = Math.floor(Math.random() * 6) + 1;
     const dice6 = Math.floor(Math.random() * 6) + 1;
-
+//test
     console.log(dice1, dice2, dice3, dice4, dice5, dice6);
    
     $("#dice1").html('<img src="assets/images/dice' + dice1 + '.png">');
@@ -18,17 +18,36 @@ $( document ).ready(function() {
     $("#dice6").html('<img src="assets/images/dice' + dice6 + '.png">');
 
     const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
-
-    $("#answer").value = "";
+    const userAnswer = parseInt($("#answer").val());
+    $("#answer").val = "";
     $("#answer").focus();
+
+    $("#submit-button").click(function() {
+        
+        if (userAnswer === sum) {
+            $("#result-text").html("Correct! The sum is " + sum);
+        } else {
+            $("#result-text").html("Incorrect! The sum is " + sum);
+        }
+        console.log("User answer: " + userAnswer);
+    });
+    
+    $("#answer").keydown(function(event) {
+        if (event.key === "enter") {
+            const userAnswer = parseInt($("#answer").val());
+            if (userAnswer === sum) {
+                $("#result-text").html("Correct! The sum is " + sum);
+            } else {
+                $("#result-text").html("Incorrect! The sum is " + sum);
+            }
+            console.log("User answer: " + userAnswer);
+        }
 })});
 
-function checkAnswer() {
+});
 
-};
+/*
 function displayResult() {
 
-};
-function timer() {
 
-};    
+function timer() */

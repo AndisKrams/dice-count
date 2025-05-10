@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#roll").click(function () {
         rollDice();
     });
-
+    rollDice();
 });
 function rollDice() {
     const dice1 = Math.floor(Math.random() * 6) + 1;

@@ -20,5 +20,8 @@ h1{
 
 #dices {
     justify-content: space-evenly;
-    background-color: black;
+    /*background-color: black;*/
 }
+/*#dices i {
+    font-size: 80px;
+}*/

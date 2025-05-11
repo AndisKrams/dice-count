@@ -13,11 +13,15 @@ console.log(dices);
 
     //test
     console.log(dice1, dice2, dice3, dice4, dice5, dice6);
-    
+
     dices.forEach((dice, index) => {
         $(`#dice${index + 1}`).html(`<img src="assets/images/dice${dice}.png">`);
     });
 
+    /* .dice
+    filter: hue-rotate(120deg); - green
+    filter: hue-rotate(240deg); - blue
+*/
     const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
     const userAnswer = parseInt($("#answer").val());
 

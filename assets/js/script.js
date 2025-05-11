@@ -5,21 +5,18 @@ $(document).ready(function () {
     rollDice();
 });
 function rollDice() {
-    const dice1 = Math.floor(Math.random() * 6) + 1;
-    const dice2 = Math.floor(Math.random() * 6) + 1;
-    const dice3 = Math.floor(Math.random() * 6) + 1;
-    const dice4 = Math.floor(Math.random() * 6) + 1;
-    const dice5 = Math.floor(Math.random() * 6) + 1;
-    const dice6 = Math.floor(Math.random() * 6) + 1;
+    let dices = Array.from({
+        length: 6
+    }, () => Math.floor(Math.random() * 6) + 1);
+console.log(dices);
+    const [dice1, dice2, dice3, dice4, dice5, dice6] = dices;
+
     //test
     console.log(dice1, dice2, dice3, dice4, dice5, dice6);
-
-    $("#dice1").html('<img src="assets/images/dice' + dice1 + '.png">');
-    $("#dice2").html('<img src="assets/images/dice' + dice2 + '.png">');
-    $("#dice3").html('<img src="assets/images/dice' + dice3 + '.png">');
-    $("#dice4").html('<img src="assets/images/dice' + dice4 + '.png">');
-    $("#dice5").html('<img src="assets/images/dice' + dice5 + '.png">');
-    $("#dice6").html('<img src="assets/images/dice' + dice6 + '.png">');
+    
+    dices.forEach((dice, index) => {
+        $(`#dice${index + 1}`).html(`<img src="assets/images/dice${dice}.png">`);
+    });
 
     const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
     const userAnswer = parseInt($("#answer").val());

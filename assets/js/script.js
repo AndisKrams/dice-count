@@ -8,22 +8,28 @@ function rollDice() {
     let dices = Array.from({
         length: 6
     }, () => Math.floor(Math.random() * 6) + 1);
-console.log(dices);
-    const [dice1, dice2, dice3, dice4, dice5, dice6] = dices;
 
     //test
-    console.log(dice1, dice2, dice3, dice4, dice5, dice6);
+    console.log(dices);
+    //randomize color
 
-    dices.forEach((dice, index) => {
-        $(`#dice${index + 1}`).html(`<img src="assets/images/dice${dice}.png">`);
+    const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
+    let randomColors = Array.from({
+        length: 6
+    }, () => colors[Math.floor(Math.random() * colors.length)]);
+
+    console.log(randomColors);
+
+    randomColors.forEach((randomColor, index) => {
+        const dice = dices[index];
+        $(`#dice${index + 1}`).html(`<img src="assets/images/${randomColor}${dice}.png">`);
     });
 
-    /* .dice
-    filter: hue-rotate(120deg); - green
-    filter: hue-rotate(240deg); - blue
-*/
-    const sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6;
+
+
     const userAnswer = parseInt($("#answer").val());
+    let sum = 0
+    dices.map(e => sum += e)
 
     console.log("Sum: " + sum);
 
@@ -46,7 +52,7 @@ console.log(dices);
         }
         console.log("User answer: " + userAnswer);
     }
-    
+
     $("#answer").val = "";
     $("#answer").focus();
 }

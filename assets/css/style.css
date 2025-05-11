@@ -20,11 +20,6 @@ h1{
 
 #dices {
     justify-content: space-evenly;
-    /*background-color: black;*/
+    background-color: black;
 }
-.dice {
-    filter: hue-rotate(300deg);
-}
-/*#dices i {
-    font-size: 80px;
-}*/
+

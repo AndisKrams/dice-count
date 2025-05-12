@@ -6,19 +6,17 @@ $(document).ready(function () {
 });
 function rollDice() {
     let dices = Array.from({
-        length: 6
+        length: 30
     }, () => Math.floor(Math.random() * 6) + 1);
-
-    //test
-    console.log(dices);
+    
     //randomize color
 
     const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
     let randomColors = Array.from({
-        length: 6
+        length: 30
     }, () => colors[Math.floor(Math.random() * colors.length)]);
 
-    console.log(randomColors);
+    
 
     randomColors.forEach((randomColor, index) => {
         const dice = dices[index];
@@ -28,9 +26,12 @@ function rollDice() {
 
 
     const userAnswer = parseInt($("#answer").val());
+
     let sum = 0
     dices.map(e => sum += e)
-
+    //test
+    console.log(dices);
+    console.log(randomColors);
     console.log("Sum: " + sum);
 
     $("#submit-button").click(function () {

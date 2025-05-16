@@ -19,7 +19,8 @@ function rollDice() {
     //randomize dices
     randomColors.forEach((randomColor, index) => {
         const dice = dices[index];
-        $(`#dice${index + 1}`).html(`<img src="assets/images/${randomColor}${dice}.png">`);
+        $(`#dice${index + 1}`).html(`<span class="pip"></span>`.repeat(dice));
+        $(`#dice${index + 1}`).css("background-color", randomColor);
     });
     //actve colour
     const activeColor = randomColors[Math.floor(Math.random() * randomColors.length)];

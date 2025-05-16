@@ -3,23 +3,80 @@ body {
     text-align: center;
     margin: auto;
     max-width: 1024px;
-}    
-h1{
+}
+
+h1 {
     font-size: 2em;
     text-align: center;
 }
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 20px;
-    background-color: #f4f4f4;
-    
+    background-color: gray
+
 }
 
 #dices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
     background-color: black;
 }
 
+.dice {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px;
+    padding: 10px;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 10%;
+    display: grid;
+    grid-template-areas:
+        "a . c"
+        "e g f"
+        "d . b";
+}
+
+.pip {
+    display: block;
+    width: calc(25% * 70px);
+    /* Assuming 70px is the intended width of the face */
+    height: calc(25% * 70px);
+    /* Assuming 70px is the intended height of the face */
+    border-radius: 50%;
+    margin: 4px;
+    background-color: black;
+}
+
+.pip:nth-child(2) {
+    grid-area: b;
+}
+
+.pip:nth-child(3) {
+    grid-area: c;
+}
+
+.pip:nth-child(4) {
+    grid-area: d;
+}
+
+.pip:nth-child(5) {
+    grid-area: e;
+}
+
+.pip:nth-child(6) {
+    grid-area: f;
+}
+
+.pip:nth-child(odd):last-child {
+    grid-area: g;
+}

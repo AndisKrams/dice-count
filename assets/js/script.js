@@ -1,5 +1,11 @@
 $(document).ready(function () {
-    $("#roll").click(function () {
+    $("#roll, #dices").click(function () {
+        rollDice();
+    });
+    $(document).keydown(function (event) {
+        if (event.key === "Space") {
+            event.preventDefault();
+        }
         rollDice();
     });
     rollDice();

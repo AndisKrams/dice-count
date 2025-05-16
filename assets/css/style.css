@@ -80,3 +80,8 @@ h1 {
 .pip:nth-child(odd):last-child {
     grid-area: g;
 }
+
+#question {
+    font-size: 3em;
+    text-align: center;
+}

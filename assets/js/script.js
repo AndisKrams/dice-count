@@ -27,18 +27,16 @@ function rollDice() {
     const activeDices = dices.filter((dice, index) => randomColors[index] === activeColor);
     const sum = activeDices.reduce((acc, dice) => acc + dice, 0);
 
-    $("#question").html(`What is the sum of all ${activeColor} dices?`);
-    $("#question").css("color", activeColor);
+    $("#question").html(`What is the sum of all <strong>${activeColor}</strong> dices?`);
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    //Randomly assigns color in the question
+    $("#question>strong").css("color", randomColor);
 
     console.log("Active Color: " + activeColor);
     console.log("Active Dices: " + activeDices);
 
     const userAnswer = parseInt($("#answer").val());
-
-
-    //let sum = 0
-    //dices.map(e => sum += e)
-    //test
+    console.log("User answer: " + userAnswer);
     console.log(dices);
     console.log(randomColors);
     console.log("Sum: " + sum);

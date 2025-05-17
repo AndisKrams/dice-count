@@ -2,15 +2,15 @@ $(document).ready(function () {
     $("#roll, #dices").click(function () {
         rollDice();
     });
-    $(document).keydown(function () {
-        if (key.event === "Space") {
-            preventDefault();
+    $(document).keypress(function (e) {
+        if (e.key === " " || e.key === "Spacebar") {
+            e.preventDefault();
             rollDice();
         }
-        
     });
     rollDice();
 });
+
 function rollDice() {
     let dices = Array.from({
         length: 30

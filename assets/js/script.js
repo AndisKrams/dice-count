@@ -17,7 +17,7 @@ function rollDice() {
     }, () => Math.floor(Math.random() * 6) + 1);
 
     //dices html
-    
+
     dicesContainer = $("#dices");
     dicesContainer.empty();
     dices.forEach((_dice, index) => {
@@ -30,7 +30,7 @@ function rollDice() {
 
     const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
     let randomColors = Array.from({
-        length: 30
+        length: dices.length,
     }, () => colors[Math.floor(Math.random() * colors.length)]);
 
     //randomize dices

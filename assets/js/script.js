@@ -16,6 +16,16 @@ function rollDice() {
         length: 30
     }, () => Math.floor(Math.random() * 6) + 1);
 
+    //dices html
+    
+    dicesContainer = $("#dices");
+    dicesContainer.empty();
+    dices.forEach((_dice, index) => {
+        length = dices.length;
+        // Create a new div element for each dice
+        const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
+        dicesContainer.append(diceElement);
+    });
     //randomize color
 
     const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
@@ -31,7 +41,7 @@ function rollDice() {
     });
     //actve colour
     const activeColor = randomColors[Math.floor(Math.random() * randomColors.length)];
-    const activeDices = dices.filter((dice, index) => randomColors[index] === activeColor);
+    const activeDices = dices.filter((_dice, index) => randomColors[index] === activeColor);
     const sum = activeDices.reduce((acc, dice) => acc + dice, 0);
 
     $("#question").html(`What is the sum of all <strong>${activeColor}</strong> dices?`);

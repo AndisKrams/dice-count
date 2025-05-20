@@ -71,10 +71,11 @@ function rollDice() {
     function checkAnswer() {
         const userAnswer = parseInt($("#answer").val());
         if (userAnswer === sum) {
-            $("#result-text").html("Correct! The sum is " + sum);
+            $("#result-text").html(`Correct! The sum of <span>${activeColor}</span> dices is ${sum}`);
         } else {
-            $("#result-text").html("Incorrect! The sum is " + sum);
+            $("#result-text").html(`Incorrect! The sum of <span>${activeColor}</span> dices is ${sum}`);
         }
+        $("#result-text>span").css("color", activeColor);
         console.log("User answer: " + userAnswer);
     }
 

@@ -64,10 +64,20 @@ function rollDice() {
 
     function checkAnswer() {
         const userAnswer = parseInt($("#answer").val());
+        // Incorrect input
         if (Number.isNaN(userAnswer)) {
             $("#result-text").html("Please enter a valid number.");
             return;
         }
+        if (userAnswer < 0) {
+            $("#result-text").html("Please enter a positive number.");
+            return;
+        }
+        if (userAnswer === "") {
+            $("#result-text").html("Please enter a number.");
+            return;
+        }
+        // Evaluate the answer
         if (userAnswer === sum) {
             $("#result-text").html(`Correct! The sum of <span>${activeColor}</span> dices is ${sum}`);
         } else {

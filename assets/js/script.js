@@ -18,25 +18,22 @@ function rollDice() {
 
     //dices html
 
-    dicesContainer = $("#dices");
-    dicesContainer.empty();
+    ($("#dices")).empty();
     dices.forEach((_dice, index) => {
-        length = dices.length;
         // Create a new div element for each dice
         const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
-        dicesContainer.append(diceElement);
+        ($("#dices")).append(diceElement);
     });
-    //randomize color
-
+    //randomize colors
     const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
     let randomColors = Array.from({
-        length: dices.length,
+        length: dices.length
     }, () => colors[Math.floor(Math.random() * colors.length)]);
 
     //randomize dices
     randomColors.forEach((randomColor, index) => {
         const dice = dices[index];
-        $(`#dice${index + 1}`).html(`<span class="pip"></span>`.repeat(dice));
+        $(`#dice${index + 1}`).html('<span class="pip"></span>'.repeat(dice));
         $(`#dice${index + 1}`).css("background-color", randomColor);
     });
     //actve colour
@@ -51,9 +48,6 @@ function rollDice() {
 
     console.log("Active Color: " + activeColor);
     console.log("Active Dices: " + activeDices);
-
-    const userAnswer = parseInt($("#answer").val());
-    console.log("User answer: " + userAnswer);
     console.log(dices);
     console.log(randomColors);
     console.log("Sum: " + sum);
@@ -70,6 +64,10 @@ function rollDice() {
 
     function checkAnswer() {
         const userAnswer = parseInt($("#answer").val());
+        if (Number.isNaN(userAnswer)) {
+            $("#result-text").html("Please enter a valid number.");
+            return;
+        }
         if (userAnswer === sum) {
             $("#result-text").html(`Correct! The sum of <span>${activeColor}</span> dices is ${sum}`);
         } else {

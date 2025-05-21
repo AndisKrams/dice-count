@@ -18,7 +18,11 @@
 
         <p class="stopwatch">00:00:00</p>
         <p id="question"></p>
-        <p>Number of dices <input id="total-dices" type="number"></p>
+
+        <div class="slidecontainer">
+            <p>Number of dices: <span id="value"></span></p>
+            <input type="range" min="20" max="50" value="20" class="slider" id="dicesRange">
+        </div>
     </div>
 
     <div id="dices" title="Click to roll the dices or press the space bar">

@@ -13,9 +13,8 @@ $(document).ready(function () {
 
 function rollDice() {
     let dices = Array.from({
-        length: 30
+        length: 36
     }, () => Math.floor(Math.random() * 6) + 1);
-
 
     //dices html
 

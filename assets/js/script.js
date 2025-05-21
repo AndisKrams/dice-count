@@ -16,6 +16,7 @@ function rollDice() {
         length: 30
     }, () => Math.floor(Math.random() * 6) + 1);
 
+
     //dices html
 
     ($("#dices")).empty();
@@ -87,7 +88,7 @@ function rollDice() {
         console.log("User answer: " + userAnswer);
     }
 
-    $("#answer").val = "";
+    
     $("#answer").focus();
 }
 

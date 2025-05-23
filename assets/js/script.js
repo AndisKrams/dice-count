@@ -9,12 +9,20 @@ $(document).ready(function () {
         }
     });
     rollDice();
+
+    //dices range
+    $("#slider-value").text($("#dicesRange").val());
+    $("#dicesRange").on("input", function () {
+        $("#slider-value").text($(this).val());
+    });
+
 });
 
 function rollDice() {
     let dices = Array.from({
-        length: 36
+        length: $("#dicesRange").val()
     }, () => Math.floor(Math.random() * 6) + 1);
+
 
     //dices html
 
@@ -87,7 +95,7 @@ function rollDice() {
         console.log("User answer: " + userAnswer);
     }
 
-    
+
     $("#answer").focus();
 }
 

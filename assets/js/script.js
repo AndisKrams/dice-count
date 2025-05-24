@@ -23,7 +23,9 @@ function rollDice() {
         length: $("#dicesRange").val()
     }, () => Math.floor(Math.random() * 6) + 1);
 
-
+    // Clear previous result text and input field
+    $("#result-text").empty();
+    $("#answer").val(""); 
     //dices html
 
     ($("#dices")).empty();

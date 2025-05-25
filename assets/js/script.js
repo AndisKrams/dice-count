@@ -79,22 +79,23 @@ function rollDice() {
             $("#result-text").html("Please enter a valid number.");
             return;
         }
-        if (userAnswer < 0) {
+        else if (userAnswer < 0) {
             $("#result-text").html("Please enter a positive number.");
             return;
         }
-        if (userAnswer === "") {
+        else if (userAnswer === "") {
             $("#result-text").html("Please enter a number.");
             return;
         }
         // Evaluate the answer
-        if (userAnswer === sum) {
+        else if (userAnswer === sum) {
             $("#result-text").html(`Correct! The sum of <span>${activeColor}</span> dices is ${sum}`);
         } else {
             $("#result-text").html(`Incorrect! The sum of <span>${activeColor}</span> dices is ${sum}`);
         }
         $("#result-text>span").css("color", activeColor);
         console.log("User answer: " + userAnswer);
+        
     }
 
 

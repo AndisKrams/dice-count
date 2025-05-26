@@ -82,18 +82,12 @@ function rollDice() {
         // Incorrect input
         if (Number.isNaN(userAnswer)) {
             $("#result-text").html("Please enter a valid number.");
-            return;
-        }
-        else if (userAnswer < 0) {
+        } else if (userAnswer < 0) {
             $("#result-text").html("Please enter a positive number.");
-            return;
-        }
-        else if (userAnswer === "") {
+        } else if (userAnswer === "") {
             $("#result-text").html("Please enter a number.");
-            return;
-        }
-        // Evaluate the answer
-        else if (userAnswer === sum) {
+        // Evaluate the answer    
+        } else if (userAnswer === sum) {
             $("#result-text").html(`Correct! ${resultText}`);
         } else {
             $("#result-text").html(`Incorrect! ${resultText}`);

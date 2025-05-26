@@ -1,16 +1,14 @@
 $(document).ready(function () {
     $("#roll, #dices").click(function () {
         rollDice();
-        timer();
     });
     $(document).keypress(function (e) {
         if (e.key === " " || e.key === "Spacebar") {
             e.preventDefault();
             rollDice();
-            timer();
         }
     });
-    rollDice();
+    rollDice(); // Initial roll on page load
 
     //dices range
     $("#slider-value").text($("#dicesRange").val());
@@ -19,16 +17,19 @@ $(document).ready(function () {
     });
 
 });
-
-
+// Function to roll the dices and display results
 function rollDice() {
+    $("#input").show(); // Show the input field
+
     let dices = Array.from({
         length: $("#dicesRange").val()
     }, () => Math.floor(Math.random() * 6) + 1);
-
     // Clear previous result text and input field
     $("#result-text").empty();
     $("#answer").val("");
+    $("#answer").focus();
+    //$("#input").show();
+
     //dices html
 
     ($("#dices")).empty();
@@ -37,6 +38,7 @@ function rollDice() {
         const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
         ($("#dices")).append(diceElement);
     });
+
     //randomize colors
     const colors = ["red", "green", "blue", "yellow", "white", "orange", "violet"];
     let randomColors = Array.from({
@@ -53,7 +55,6 @@ function rollDice() {
     const activeColor = randomColors[Math.floor(Math.random() * randomColors.length)];
     const activeDices = dices.filter((_dice, index) => randomColors[index] === activeColor);
     const sum = activeDices.reduce((acc, dice) => acc + dice, 0);
-
     $("#question").html(`What is the sum of all <strong>${activeColor}</strong> dices?`);
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     //Randomly assigns color in the question
@@ -98,16 +99,17 @@ function rollDice() {
             $("#result-text").html(`Incorrect! ${resultText}`);
         }
         $("#result-text>span").css("color", activeColor);
+
         console.log("User answer: " + userAnswer);
 
     }
     timer(); // Start the timer after rolling the dice
-    // Focus on the answer input field
-    $("#answer").focus();
+
+
 }
 
 function timer() {
-    let timeLeft = 5; // Set the timer duration in seconds
+    let timeLeft = 2; // Set the timer duration in seconds
     const timerElement = $("#timer");
     timerElement.text(timeLeft);
 
@@ -116,8 +118,11 @@ function timer() {
         timerElement.text(timeLeft);
         if (timeLeft <= 0) {
             clearInterval(interval);
-            $("#result-text").html(`Time's up! Please try again.`);
-            $("#answer").val("");
+            $("#result-text").html("Time's up! Please try again.");
+            $("#input").hide(); //Prevent input after time is up
+            $("#question").text("Roll the dices to start again.");
+
         }
     }, 1000);
+
 }

@@ -20,6 +20,7 @@ $(document).ready(function () {
 
 });
 
+
 function rollDice() {
     let dices = Array.from({
         length: $("#dicesRange").val()
@@ -27,7 +28,7 @@ function rollDice() {
 
     // Clear previous result text and input field
     $("#result-text").empty();
-    $("#answer").val(""); 
+    $("#answer").val("");
     //dices html
 
     ($("#dices")).empty();
@@ -73,7 +74,8 @@ function rollDice() {
             checkAnswer();
         }
     });
-
+    // Result text
+    const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
     function checkAnswer() {
         const userAnswer = parseInt($("#answer").val());
         // Incorrect input
@@ -91,21 +93,21 @@ function rollDice() {
         }
         // Evaluate the answer
         else if (userAnswer === sum) {
-            $("#result-text").html(`Correct! The sum of <span>${activeColor}</span> dices is ${sum}`);
+            $("#result-text").html(`Correct! ${resultText}`);
         } else {
-            $("#result-text").html(`Incorrect! The sum of <span>${activeColor}</span> dices is ${sum}`);
+            $("#result-text").html(`Incorrect! ${resultText}`);
         }
         $("#result-text>span").css("color", activeColor);
         console.log("User answer: " + userAnswer);
-        
+
     }
-
-
+    timer(); // Start the timer after rolling the dice
+    // Focus on the answer input field
     $("#answer").focus();
 }
 
 function timer() {
-    let timeLeft = 10;
+    let timeLeft = 5; // Set the timer duration in seconds
     const timerElement = $("#timer");
     timerElement.text(timeLeft);
 
@@ -114,7 +116,7 @@ function timer() {
         timerElement.text(timeLeft);
         if (timeLeft <= 0) {
             clearInterval(interval);
-            $("#result-text").html("Time's up! Please try again.");
+            $("#result-text").html(`Time's up! Please try again.`);
             $("#answer").val("");
         }
     }, 1000);

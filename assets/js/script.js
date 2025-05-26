@@ -1,11 +1,13 @@
 $(document).ready(function () {
     $("#roll, #dices").click(function () {
         rollDice();
+        timer();
     });
     $(document).keypress(function (e) {
         if (e.key === " " || e.key === "Spacebar") {
             e.preventDefault();
             rollDice();
+            timer();
         }
     });
     rollDice();
@@ -102,6 +104,18 @@ function rollDice() {
     $("#answer").focus();
 }
 
+function timer() {
+    let timeLeft = 10;
+    const timerElement = $("#timer");
+    timerElement.text(timeLeft);
 
-/*
-function timer() */
+    const interval = setInterval(() => {
+        timeLeft--;
+        timerElement.text(timeLeft);
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            $("#result-text").html("Time's up! Please try again.");
+            $("#answer").val("");
+        }
+    }, 1000);
+}

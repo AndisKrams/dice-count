@@ -11,7 +11,10 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-
+p {
+    margin: 0;
+    font-size: 2em;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -84,14 +87,14 @@ body {
     grid-area: g;
 }
 
-#question {
-    font-size: 3em;
+/*#question {
+    font-size: 2em;
     text-align: center;
 }
 #result-text {
     font-size: 2em;
     text-align: center;
-}
+}*/
 .slidecontainer {
     width: 100%;
 }
@@ -120,5 +123,4 @@ body {
 }
 #page-load {
     color: white;
-    font-size: 2em;
 }

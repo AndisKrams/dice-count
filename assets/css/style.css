@@ -36,10 +36,10 @@ body {
 .dice {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
-    margin: 10px;
-    padding: 10px;
-    width: 70px;
-    height: 70px;
+    margin: 7px;
+    padding: 7px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     border-radius: 10%;
     display: grid;
@@ -51,12 +51,12 @@ body {
 
 .pip {
     display: block;
-    width: calc(25% * 70px);
-    /* Assuming 70px is the intended width of the face */
-    height: calc(25% * 70px);
-    /* Assuming 70px is the intended height of the face */
+    width: calc(30% * 50px);
+    /* Assuming 50px is the intended width of the face */
+    height: calc(30% * 50px);
+    /* Assuming 50px is the intended height of the face */
     border-radius: 50%;
-    margin: 4px;
+    margin: 2px;
     background-color: black;
 }
 

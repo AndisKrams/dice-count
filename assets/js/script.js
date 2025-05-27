@@ -8,14 +8,20 @@ $(document).ready(function () {
             rollDice();
         }
     });
-    rollDice(); // Initial roll on page load
+    // Timer display
+    $("#seconds").text($("#timerRange").val());
+    $("#timerRange").on("input", function () {
+        $("#seconds").text($(this).val());
+    });
 
     //dices range
     $("#total-dices").text($("#dicesRange").val());
     $("#dicesRange").on("input", function () {
         $("#total-dices").text($(this).val());
     });
-
+    // Hide input field initially
+    $("#input").hide();
+  
 });
 // Function to roll the dices and display results
 function rollDice() {

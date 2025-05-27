@@ -24,10 +24,11 @@
       />
     </div>
 
-    <div class="container"><p id="question"></p></div>
+    <div class="container">
+      <p id="question"></p>
+    </div>
 
     <div class="slidecontainer">
-      <p>Number of dices for next roll: <span id="total-dices"></span></p>
       <input
         type="range"
         min="20"
@@ -36,12 +37,15 @@
         class="slider"
         id="dicesRange"
       />
+      <p>Number of dices for next roll: <span id="total-dices"></span></p>
     </div>
-    
-    <div
-      id="dices"
-      title="Click to roll the dices or press the space bar"
-    ></div>
+
+    <div id="dices" title="Click to roll the dices or press the space bar">
+      <p id="page-load">
+        Click here or press space bar to roll the dices. Count the dices of
+        specified colour. Use sliders to set timer and how many dices to roll.
+      </p>
+    </div>
     <div class="container" id="play">
       <button
         id="roll"
@@ -64,16 +68,7 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://kit.fontawesome.com/732de80570.js"
-      crossorigin="anonymous"
-    ></script>
 
     <script src="assets/js/script.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>

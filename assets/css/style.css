@@ -118,3 +118,7 @@ body {
   background: black;
   cursor: pointer;
 }
+#page-load {
+    color: white;
+    font-size: 2em;
+}

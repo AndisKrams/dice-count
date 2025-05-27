@@ -99,11 +99,15 @@ function rollDice() {
 
 
 }
-
+// Function to start the timer
 function timer() {
-    let timeLeft = 5; // Set the timer duration in seconds
-    const timerElement = $("#timer");
+    let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
+    const timerElement = $("#seconds");
     timerElement.text(timeLeft);
+    $("#timerRange").on("input", function () {
+        timeLeft = $(this).val();
+        timerElement.text(timeLeft);
+    });
 
     const interval = setInterval(() => {
         timeLeft--;
@@ -113,7 +117,6 @@ function timer() {
             $("#result-text").html("Time's up! Please try again.");
             $("#input").hide(); //Prevent input after time is up
             $("#question").text("Roll the dices to start again.");
-
         }
     }, 1000);
 

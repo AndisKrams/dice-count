@@ -11,9 +11,9 @@ $(document).ready(function () {
     rollDice(); // Initial roll on page load
 
     //dices range
-    $("#slider-value").text($("#dicesRange").val());
+    $("#total-dices").text($("#dicesRange").val());
     $("#dicesRange").on("input", function () {
-        $("#slider-value").text($(this).val());
+        $("#total-dices").text($(this).val());
     });
 
 });
@@ -26,9 +26,7 @@ function rollDice() {
     }, () => Math.floor(Math.random() * 6) + 1);
     // Clear previous result text and input field
     $("#result-text").empty();
-    $("#answer").val("");
-    $("#answer").focus();
-    //$("#input").show();
+    $("#answer").focus().val("");
 
     //dices html
 
@@ -103,7 +101,7 @@ function rollDice() {
 }
 
 function timer() {
-    let timeLeft = 2; // Set the timer duration in seconds
+    let timeLeft = 5; // Set the timer duration in seconds
     const timerElement = $("#timer");
     timerElement.text(timeLeft);
 

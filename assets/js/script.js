@@ -21,7 +21,7 @@ $(document).ready(function () {
     });
     // Hide input field initially
     $("#input").hide();
-  
+
 });
 // Function to roll the dices and display results
 function rollDice() {
@@ -81,6 +81,7 @@ function rollDice() {
     });
     // Result text
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
+
     function checkAnswer() {
         const userAnswer = parseInt($("#answer").val());
         // Incorrect input
@@ -90,9 +91,10 @@ function rollDice() {
             $("#result-text").html("Please enter a positive number.");
         } else if (userAnswer === "") {
             $("#result-text").html("Please enter a number.");
-        // Evaluate the answer    
+            // Evaluate the answer    
         } else if (userAnswer === sum) {
             $("#result-text").html(`Correct! ${resultText}`);
+            correctScore(); // Call the function to update the score
         } else {
             $("#result-text").html(`Incorrect! ${resultText}`);
         }
@@ -101,29 +103,35 @@ function rollDice() {
         console.log("User answer: " + userAnswer);
 
     }
-    timer(); // Start the timer after rolling the dice
+    //timer(); // Start the timer after rolling the dice
 
 
 }
-// Function to start the timer
-function timer() {
-    let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
-    const timerElement = $("#seconds");
-    timerElement.text(timeLeft);
-    $("#timerRange").on("input", function () {
-        timeLeft = $(this).val();
-        timerElement.text(timeLeft);
-    });
-
-    const interval = setInterval(() => {
-        timeLeft--;
-        timerElement.text(timeLeft);
-        if (timeLeft <= 0) {
-            clearInterval(interval);
-            $("#result-text").html("Time's up! Please try again.");
-            $("#input").hide(); //Prevent input after time is up
-            $("#question").text("Roll the dices to start again.");
-        }
-    }, 1000);
-
+// Functions to update the score
+function correctScore() {
+    let score = parseInt($("#score").text()); // Get the current score
+    $("#score").text(score +1); // Update the score display
 }
+
+    // Function to start the timer
+    function timer() {
+        let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
+        const timerElement = $("#seconds");
+        timerElement.text(timeLeft);
+        $("#timerRange").on("input", function () {
+            timeLeft = $(this).val();
+            timerElement.text(timeLeft);
+        });
+
+        const interval = setInterval(() => {
+            timeLeft--;
+            timerElement.text(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                $("#result-text").html("Time's up! Please try again.");
+                $("#input").hide(); //Prevent input after time is up
+                $("#question").text("Roll the dices to start again.");
+            }
+        }, 1000);
+
+    }

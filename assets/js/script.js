@@ -1,13 +1,5 @@
 $(document).ready(function () {
-    $("#roll, #dices").click(function () {
-        rollDice();
-    });
-    $(document).keypress(function (e) {
-        if (e.key === " " || e.key === "Spacebar") {
-            e.preventDefault();
-            rollDice();
-        }
-    });
+    game(); // Start the game when the document is ready
     // Timer display
     $("#seconds").text($("#timerRange").val());
     $("#timerRange").on("input", function () {
@@ -23,6 +15,17 @@ $(document).ready(function () {
     $("#input").hide();
 
 });
+function game() {
+    $("#roll, #dices").click(function () {
+        rollDice();
+    });
+    $(document).keypress(function (e) {
+        if (e.key === " " || e.key === "Spacebar") {
+            e.preventDefault();
+            rollDice();
+        }
+    });
+}
 // Function to roll the dices and display results
 function rollDice() {
     $("#input").show(); // Show the input field
@@ -32,7 +35,7 @@ function rollDice() {
     }, () => Math.floor(Math.random() * 6) + 1);
     // Clear previous result text and input field
     $("#result-text").empty();
-    $("#answer").focus().val("");
+    $("#answer").focus().val(''); // Clear the input field
 
     //dices html
 
@@ -64,76 +67,80 @@ function rollDice() {
     //Randomly assigns color in the question
     $("#question>strong").css("color", randomColor);
 
-    console.log("Active Color: " + activeColor);
+    /*console.log("Active Color: " + activeColor);
     console.log("Active Dices: " + activeDices);
     console.log(dices);
     console.log(randomColors);
-    console.log("Sum: " + sum);
+    console.log("Sum: " + sum);*/
 
+    // submit answer
     $("#submit-button").click(function () {
         checkAnswer();
     });
 
-    $("#answer").keydown(function (event) {
-        if (event.key === "Enter") {
+    $("#answer").keypress(function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
             checkAnswer();
         }
     });
     // Result text
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
-
     function checkAnswer() {
-        const userAnswer = parseInt($("#answer").val());
-        // Incorrect input
-        if (Number.isNaN(userAnswer)) {
-            $("#result-text").text("Please enter a valid number.");
-        } else if (userAnswer < 0) {
-            $("#result-text").text("Please enter a positive number.");
-        } else if (userAnswer === "") {
-            $("#result-text").text("Please enter a number.");
-            // Evaluate the answer    
-        } else if (userAnswer === sum) {
+        let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
+        $("#result-text").empty(); // Clear previous result text
+        // // Clear the input field after checking the answer
+        // Check if the user answer is correct
+        if (userAnswer === sum) {
             $("#result-text").html(`Correct! ${resultText}`);
             $("#input").hide();
             correctScore(); // Call the function to update the score
-        } else {
-            $("#result-text").text("Incorrect! Try again.");
+            $("#question").text("Roll the dices to start again.");
+
+        } else if (Number.isNaN(userAnswer) || userAnswer <= 0) {
+            $("#result-text").text("Please enter a valid number.");
             $("#answer").val("");
+        } else {
+            $("#result-text").html(`Incorrect! ${resultText}`);
+            $("#input").hide(); // Hide the input field after incorrect answer
+            $("#question").text("Roll the dices to start again.");
         }
         $("#result-text>span").css("color", activeColor);
-
+        game(); // Restart the game
         console.log("User answer: " + userAnswer);
 
     }
+
     //timer(); // Start the timer after rolling the dice
 
 
 }
+
 // Functions to update the score
 function correctScore() {
     let score = parseInt($("#score").text()); // Get the current score
-    $("#score").text(score +1); // Update the score display
+    $("#score").text(score + 1); // Update the score display
 }
 
-    // Function to start the timer
-    function timer() {
-        let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
-        const timerElement = $("#seconds");
+// Function to start the timer
+function timer() {
+    let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
+    const timerElement = $("#seconds");
+    timerElement.text(timeLeft);
+    $("#timerRange").on("input", function () {
+        timeLeft = $(this).val();
         timerElement.text(timeLeft);
-        $("#timerRange").on("input", function () {
-            timeLeft = $(this).val();
-            timerElement.text(timeLeft);
-        });
+    });
 
-        const interval = setInterval(() => {
-            timeLeft--;
-            timerElement.text(timeLeft);
-            if (timeLeft <= 0) {
-                clearInterval(interval);
-                $("#result-text").html("Time's up! Please try again.");
-                $("#input").hide(); //Prevent input after time is up
-                $("#question").text("Roll the dices to start again.");
-            }
-        }, 1000);
+    const interval = setInterval(() => {
+        timeLeft--;
+        timerElement.text(timeLeft);
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            $("#result-text").html("Time's up! Please try again.");
+            $("#input").hide(); //Prevent input after time is up
+            $("#question").text("Roll the dices to start again.");
+        }
+    }, 1000);
 
-    }
+}

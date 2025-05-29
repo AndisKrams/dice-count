@@ -94,6 +94,7 @@ function rollDice() {
             // Evaluate the answer    
         } else if (userAnswer === sum) {
             $("#result-text").html(`Correct! ${resultText}`);
+            $("#input").hide();
             correctScore(); // Call the function to update the score
         } else {
             $("#result-text").html(`Incorrect! ${resultText}`);

@@ -61,7 +61,7 @@ function rollDice() {
     //actve colour
     const activeColor = randomColors[Math.floor(Math.random() * randomColors.length)];
     const activeDices = dices.filter((_dice, index) => randomColors[index] === activeColor);
-    const sum = activeDices.reduce((acc, dice) => acc + dice, 0);
+    let sum = activeDices.reduce((acc, dice) => acc + dice, 0);
     $("#question").html(`What is the sum of all <strong>${activeColor}</strong> dices?`);
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     //Randomly assigns color in the question
@@ -88,10 +88,8 @@ function rollDice() {
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
     function checkAnswer() {
         let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
-        $("#result-text").empty(); // Clear previous result text
-        // // Clear the input field after checking the answer
-        // Check if the user answer is correct
-        if (userAnswer === sum) {
+        let correct = userAnswer === sum;  // Check if the user answer is correct
+        if (correct) {
             $("#result-text").html(`Correct! ${resultText}`);
             $("#input").hide();
             correctScore(); // Call the function to update the score
@@ -107,7 +105,7 @@ function rollDice() {
         }
         $("#result-text>span").css("color", activeColor);
         game(); // Restart the game
-        console.log("User answer: " + userAnswer);
+        //console.log("User answer: " + userAnswer);
 
     }
 
@@ -116,10 +114,10 @@ function rollDice() {
 
 }
 
-// Functions to update the score
+// Function to update the score
 function correctScore() {
-    let score = parseInt($("#score").text()); // Get the current score
-    $("#score").text(score + 1); // Update the score display
+    let score = parseInt($("#score").text()) || 0; 
+    $("#score").text(++score);
 }
 
 // Function to start the timer

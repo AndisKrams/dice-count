@@ -86,18 +86,19 @@ function rollDice() {
         const userAnswer = parseInt($("#answer").val());
         // Incorrect input
         if (Number.isNaN(userAnswer)) {
-            $("#result-text").html("Please enter a valid number.");
+            $("#result-text").text("Please enter a valid number.");
         } else if (userAnswer < 0) {
-            $("#result-text").html("Please enter a positive number.");
+            $("#result-text").text("Please enter a positive number.");
         } else if (userAnswer === "") {
-            $("#result-text").html("Please enter a number.");
+            $("#result-text").text("Please enter a number.");
             // Evaluate the answer    
         } else if (userAnswer === sum) {
             $("#result-text").html(`Correct! ${resultText}`);
             $("#input").hide();
             correctScore(); // Call the function to update the score
         } else {
-            $("#result-text").html(`Incorrect! ${resultText}`);
+            $("#result-text").text("Incorrect! Try again.");
+            $("#answer").val("");
         }
         $("#result-text>span").css("color", activeColor);
 

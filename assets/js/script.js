@@ -16,17 +16,21 @@ $(document).ready(function () {
 });
 function game() {
   $("#roll, #dices").click(function () {
-    rollDice();
+    rollDice(); // Call the function to roll the dices
   });
   $(document).keypress(function (e) {
     if (e.key === " " || e.key === "Spacebar") {
-      e.preventDefault();
+      e.preventDefault(); // Prevent default action for space key
       rollDice();
     }
   });
 }
+
 // Function to roll the dices and display results
 function rollDice() {
+  // Remove the event listeners
+  $("#roll, #dices").off("click");
+  $(document).off("keypress");
   $("#input").show(); // Show the input field
 
   let dices = Array.from(
@@ -75,7 +79,9 @@ function rollDice() {
   const activeColor =
     randomColors[Math.floor(Math.random() * randomColors.length)];
   const activeDices = dices.filter(
-    (_dice, index) => randomColors[index] === activeColor
+    (_dice, index) => {
+          return randomColors[index] === activeColor;
+      }
   );
   let sum = activeDices.reduce((acc, dice) => acc + dice, 0);
   $("#question").html(
@@ -86,22 +92,24 @@ function rollDice() {
   $("#question>strong").css("color", randomColor);
 
   /*console.log("Active Color: " + activeColor);
-    console.log("Active Dices: " + activeDices);
-    console.log(dices);
-    console.log(randomColors);
-    console.log("Sum: " + sum);*/
+      console.log("Active Dices: " + activeDices);
+      console.log(dices);
+      console.log(randomColors);
+      console.log("Sum: " + sum);*/
 
   // submit answer
-  $("#submit-button").click(function () {
-    validateInput();
-  });
-
-  $("#answer").keypress(function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      validateInput();
-    }
-  });
+  function submitAnswer() {
+    $("#submit-button").click(function () {
+      validateInput(); // Call the function to validate input
+    });
+    $("#answer").keypress(function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // Prevent form submission on Enter key
+        validateInput(); // Call the function to validate input
+      }
+    });
+  }
+  submitAnswer();
 
   function validateInput() {
     const input = $("#answer").val();
@@ -121,10 +129,12 @@ function rollDice() {
       $("#input").hide();
       correctScore(); // Call the function to update the score
       $("#question").text("Roll the dices to start again.");
+      game(); // Restart the game
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#input").hide(); // Hide the input field after incorrect answer
       $("#question").text("Roll the dices to start again.");
+      game();
     }
     $("#result-text>span").css("color", activeColor);
 

@@ -3,7 +3,7 @@ $(document).ready(function () {
   // Timer display
   $("#seconds").text($("#timerRange").val());
   $("#timerRange").on("input", function () {
-    $("#seconds").text($(this).val());
+    $("#seconds").text($("#timerRange").val());
   });
 
   //dices range
@@ -18,7 +18,7 @@ function game() {
   $("#roll, #dices").click(function () {
     rollDice(); // Call the function to roll the dices
   });
-  $(document).keypress(function (e) {
+  $(document).keydown(function (e) {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for space key
       rollDice();
@@ -30,7 +30,7 @@ function game() {
 function rollDice() {
   // Remove the event listeners
   $("#roll, #dices").off("click");
-  $(document).off("keypress");
+  $(document).off("keydown");
   $("#input").show(); // Show the input field
 
   let dices = Array.from(
@@ -46,10 +46,10 @@ function rollDice() {
   //dices html
 
   $("#dices").empty();
-  dices.forEach((_dice, index) => {
-    // Create a new div element for each dice
-    const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
-    $("#dices").append(diceElement);
+  dices.forEach(function (_dice, index) {
+      // Create a new div element for each dice
+      const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
+      $("#dices").append(diceElement);
   });
 
   //randomize colors
@@ -60,7 +60,7 @@ function rollDice() {
     "yellow",
     "white",
     "orange",
-    "violet",
+    "violet"
   ];
   let randomColors = Array.from(
     {
@@ -79,11 +79,11 @@ function rollDice() {
   const activeColor =
     randomColors[Math.floor(Math.random() * randomColors.length)];
   const activeDices = dices.filter(
-    (_dice, index) => {
-          return randomColors[index] === activeColor;
-      }
+    function (_dice, index) {
+      return randomColors[index] === activeColor;
+  }
   );
-  let sum = activeDices.reduce((acc, dice) => acc + dice, 0);
+  const sum = activeDices.reduce((acc, dice) => acc + dice, 0);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
@@ -91,18 +91,12 @@ function rollDice() {
   //Randomly assigns color in the question
   $("#question>strong").css("color", randomColor);
 
-  /*console.log("Active Color: " + activeColor);
-      console.log("Active Dices: " + activeDices);
-      console.log(dices);
-      console.log(randomColors);
-      console.log("Sum: " + sum);*/
-
   // submit answer
   function submitAnswer() {
     $("#submit-button").click(function () {
       validateInput(); // Call the function to validate input
     });
-    $("#answer").keypress(function (e) {
+    $("#answer").keydown(function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
         validateInput(); // Call the function to validate input
@@ -122,6 +116,7 @@ function rollDice() {
   }
   function checkAnswer() {
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
+    $("#result-text>span").css("color", activeColor);
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     let correct = userAnswer === sum; // Check if the user answer is correct
     if (correct) {
@@ -134,24 +129,20 @@ function rollDice() {
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#input").hide(); // Hide the input field after incorrect answer
       $("#question").text("Roll the dices to start again.");
-      game();
+      game();   
     }
-    $("#result-text>span").css("color", activeColor);
-
-    console.log("User answer: " + userAnswer);
-  }
-
-  //timer(); // Start the timer after rolling the dice
+  }  
 }
+  
 
 // Function to update the score
 function correctScore() {
   let points = parseInt($("#score").text()) || 0;
-  $("#score").text(++points); // Increment the score by 1
-  console.log("Score: " + points); // Log the score to the console
+  $("#score").text(++points); // Increment the score by 1 
+  //return points; 
 }
 
-// Function to start the timer
+/* Function to start the timer
 function timer() {
   let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
   const timerElement = $("#seconds");
@@ -171,4 +162,4 @@ function timer() {
       $("#question").text("Roll the dices to start again.");
     }
   }, 1000);
-}
+}*/

@@ -91,41 +91,25 @@ function rollDice() {
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   //Randomly assigns color in the question
   $("#question>strong").css("color", randomColor);
-  submitAnswer();
-  const sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
+  
+  let sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   console.log(`Sum of active dices: ${sum}`);
-}  
-
-  // submit answer
-  function submitAnswer() {
-    $("#submit-button").click(function () {
-      validateInput(); // Call the function to validate input
+  $("#submit-button").click(function () {
+      checkAnswer(); // Call the function to validate input
     });
     $("#answer").keydown(function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
-        validateInput(); // Call the function to validate input
+        checkAnswer(); // Call the function to validate input
       }
     });
-  }
-
-  function validateInput() {
-    const input = $("#answer").val();
-    if (input === "" || isNaN(input) || parseInt(input) <= 0) {
-      $("#result-text").text("Please enter a valid number.");
-      return false;
-    } else {
-      checkAnswer(); // Call the function to check the answer
-    }
-  }
-  
   function checkAnswer() {
-    const activeColor =
       $("#question>strong").text(); // Get the active color from the question
     
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
     $("#result-text>span").css("color", activeColor);
     $("#result-text").html(resultText); // Display the result text
+    let input = $("#answer").val();
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     let correct = userAnswer === sum; // Check if the user answer is correct
     if (correct) {
@@ -134,6 +118,9 @@ function rollDice() {
       correctScore(); // Call the function to update the score
       $("#question").text("Roll the dices to start again.");
       game(); // Restart the game
+    } if (input === "" || isNaN(input) || userAnswer <= 0) {
+      $("#result-text").text("Please enter a valid number.");
+      return false;
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#input").hide(); // Hide the input field after incorrect answer
@@ -142,6 +129,11 @@ function rollDice() {
     }
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
   }
+}  
+
+
+  
+  
 
 // Function to update the score
 function correctScore() {

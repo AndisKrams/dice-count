@@ -14,6 +14,16 @@ $(document).ready(function () {
   $("#input").hide();
   game(); // Call the game function to start the game
 });
+
+/*let variables = {
+  activeColor: "", // Variable to hold the active color of the dices
+  activeDices: [], // Array to hold the active dices
+  dices: [], // Array to hold the dices values
+  randomColors: [], // Array to hold the random colors of the dices
+  questionColor: "" // Variable to hold the color used in the question
+
+};*/
+
 function game() {
   $("#roll, #dices").click(rollDice); // Reattach the click event listener to roll the dices
   $(document).keydown(function (e) {
@@ -24,7 +34,7 @@ function game() {
   });
 }
 
-// Function to roll the dices and display results
+// Function to roll the dices
 function rollDice() {
   // Remove the event listeners
   $("#roll, #dices").off("click");
@@ -79,13 +89,13 @@ function rollDice() {
   let activeDices = dices.filter(function (_dice, index) {
     return randomColors[index] === activeColor;
   });
-  let randomColor = colors[Math.floor(Math.random() * colors.length)];
+  let questionColor = colors[Math.floor(Math.random() * colors.length)];
   //console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
   //Randomly assigns color in the question
-  $("#question>strong").css("color", randomColor);
+  $("#question>strong").css("color", questionColor);
 
   $("#submit-button").click(checkAnswer); // Attach click event to the submit button
   $("#answer").keydown(function (e) {

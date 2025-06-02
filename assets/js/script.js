@@ -80,7 +80,7 @@ function rollDice() {
     return randomColors[index] === activeColor;
   });
   let randomColor = colors[Math.floor(Math.random() * colors.length)];
-  console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
+  //console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
@@ -100,7 +100,7 @@ function checkAnswer(actColor, actDices) {
   let input = $("#answer").val();
   let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
   let sum = actDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
-  console.log(`Sum of active dices: ${sum}, active color:${actColor}`); 
+  //console.log(`Sum of active dices: ${sum}, active color:${actColor}`); 
   let correct = userAnswer === sum; // Check if the user answer is correct
   const resultText = `The sum of <span>${actColor}</span> dices is ${sum}`;
 
@@ -118,7 +118,7 @@ function checkAnswer(actColor, actDices) {
   }
   $("#result-text>span").css("color", actColor);
   console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
-  game(); // Restart the game
+  game(); 
 }
 
 // Function to update the score

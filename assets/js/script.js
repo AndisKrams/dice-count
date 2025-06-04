@@ -15,8 +15,8 @@ $(document).ready(function () {
 });
 function start() {
   $("#roll").show(); // Show the roll button
-   $("#roll, #dices").click(rollDice);
-  $(document).keydown(function (e) {
+  $("#roll, #dices").on("click", rollDice);
+  $(document).on("keydown", function (e) {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
@@ -94,16 +94,23 @@ function rollDice() {
   activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
   answer();
-
   function answer() {
-    $("#submit-button").click(checkAnswer(activeColor, activeSum)); // Attach click event to the submit button
-    $("#answer").keydown(function (e) {
+    $("#submit-button").on("click", function (e) {
+      e.preventDefault(); // Prevent default form submission
+      checkAnswer(activeColor, activeSum);
+    });
+    $("#answer").on("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
         checkAnswer(activeColor, activeSum);
       }
     });
   }
+  /*function answer() {
+    if ($("#submit-button").click === true) {
+      return checkAnswer(activeColor, activeSum);
+    }
+  }*/
 }
 // Function to check the user's answer
 function checkAnswer(actColor, sum) {
@@ -124,13 +131,15 @@ function checkAnswer(actColor, sum) {
     $("#question").text("Roll the dices to start again.");
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
-  } else if (userAnswer <= 0 && input !== "") {
+  } else if (userAnswer <= 0 ) {
     $("#result-text").text("Please enter a positive number.");
     $("#answer").val(""); // Clear the input field
+    $("#answer").focus(); // Focus back on the input field
     return false;
   } else if (input === "" || isNaN(input)) {
     $("#answer").val(""); // Clear the input field
     $("#result-text").text("Please enter a number.");
+    $("#answer").focus(); // Focus back on the input field
     return false;
   } else {
     $("#input").hide();
@@ -140,8 +149,8 @@ function checkAnswer(actColor, sum) {
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
   }
-  
-  
+
+
 }
 
 // Function to update the score

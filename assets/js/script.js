@@ -122,6 +122,7 @@ function checkAnswer(actColor, sum) {
     $("#result-text>span").css("color", actColor);
     correctScore(); // Call the function to update the score
     $("#question").text("Roll the dices to start again.");
+    console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
   } else if (userAnswer <= 0 && input !== "") {
     $("#result-text").text("Please enter a positive number.");
@@ -136,10 +137,11 @@ function checkAnswer(actColor, sum) {
     $("#result-text").html(`Incorrect! ${resultText}`);
     $("#result-text>span").css("color", actColor);
     $("#question").text("Roll the dices to start again.");
+    console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
   }
   
-  console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
+  
 }
 
 // Function to update the score

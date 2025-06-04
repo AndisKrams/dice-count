@@ -93,13 +93,17 @@ function rollDice() {
   $("#question>strong").css("color", questionColor);
   activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
-  $("#submit-button").click(checkAnswer(activeColor, activeSum)); // Attach click event to the submit button
-  $("#answer").keydown(function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevent form submission on Enter key
-      checkAnswer(activeColor, activeSum); // Call the function to validate 
-    }
-  });
+  answer();
+
+  function answer() {
+    $("#submit-button").click(checkAnswer(activeColor, activeSum)); // Attach click event to the submit button
+    $("#answer").keydown(function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // Prevent form submission on Enter key
+        checkAnswer(activeColor, activeSum);
+      }
+    });
+  }
 }
 // Function to check the user's answer
 function checkAnswer(actColor, sum) {

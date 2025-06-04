@@ -10,22 +10,12 @@ $(document).ready(function () {
   $("#dicesRange").on("input", function () {
     $("#total-dices").text($(this).val());
   });
-  // Hide input field initially
-  $("#input").hide();
-  game(); // Call the game function to start the game
+  $("#input").hide(); // Hide the input field initially
+  start(); // Start the game by listening for keydown events
 });
-
-/*let variables = {
-  activeColor: "", // Variable to hold the active color of the dices
-  activeDices: [], // Array to hold the active dices
-  dices: [], // Array to hold the dices values
-  randomColors: [], // Array to hold the random colors of the dices
-  questionColor: "" // Variable to hold the color used in the question
-
-};*/
-
-function game() {
-  $("#roll, #dices").click(rollDice); // Reattach the click event listener to roll the dices
+function start() {
+  $("#roll").show(); // Show the roll button
+   $("#roll, #dices").click(rollDice);
   $(document).keydown(function (e) {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
@@ -34,8 +24,15 @@ function game() {
   });
 }
 
-// Function to roll the dices
+// Function to roll the dices and display results
 function rollDice() {
+  let dices = []; // Array to hold the random dice values
+  let randomColors = []; // Array to hold the random colors for each dice
+  let activeColor = ""; // Variable to hold the active color of the dices
+  let activeDices = []; // Array to hold the active dices based on the active color
+  let questionColor = ""; // Variable to hold the color used in the question
+  let activeSum = null; // Variable to hold the sum of active dices
+
   // Remove the event listeners
   $("#roll, #dices").off("click");
   $(document).off("keydown");
@@ -45,13 +42,12 @@ function rollDice() {
   $("#submit-button").click(checkAnswer); // Attach click event to the submit button
 
   // Generate random dices values based on the range input value
-  let dices = Array.from(
-    {
-      length: $("#dicesRange").val()
-    },
-    () => Math.floor(Math.random() * 6) + 1
-  );
-
+  let totalDices = parseInt($("#dicesRange").val()); // Get the number of dices from the range input
+  for (let i = 0; i < totalDices; i++) {
+    // Generate a random number between 1 and 6 for each dice
+    let randomDice = Math.floor(Math.random() * 6) + 1;
+    dices.push(randomDice); // Add the random dice value to the array
+  }
   //dices html
   $("#dices").empty();
   dices.forEach(function (_dice, index) {
@@ -71,12 +67,11 @@ function rollDice() {
     "violet"
   ];
   // Generate random colors for each dice
-  let randomColors = Array.from(
-    {
-      length: dices.length
-    },
-    () => colors[Math.floor(Math.random() * colors.length)]
-  );
+  for (let i = 0; i < totalDices; i++) {
+    // Generate a random color from the colors array
+    let randomColor = colors[Math.floor(Math.random() * colors.length)];
+    randomColors.push(randomColor); // Add the random color to the array
+  }
   //randomize dices
   randomColors.forEach((randomColor, index) => {
     let dice = dices[index];
@@ -84,51 +79,63 @@ function rollDice() {
     $(`#dice${index + 1}`).css("background-color", randomColor);
   });
   //actve colour
-  let activeColor =
+  activeColor =
     randomColors[Math.floor(Math.random() * randomColors.length)];
-  let activeDices = dices.filter(function (_dice, index) {
+  activeDices = dices.filter(function (_dice, index) {
     return randomColors[index] === activeColor;
   });
-  let questionColor = colors[Math.floor(Math.random() * colors.length)];
-  //console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
+  questionColor = colors[Math.floor(Math.random() * colors.length)];
+  console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
   //Randomly assigns color in the question
   $("#question>strong").css("color", questionColor);
-
-  $("#submit-button").click(checkAnswer); // Attach click event to the submit button
+  activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
+  console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
+  $("#submit-button").click(checkAnswer(activeColor, activeSum)); // Attach click event to the submit button
   $("#answer").keydown(function (e) {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent form submission on Enter key
-      checkAnswer(activeColor, activeDices); // Call the function to validate input
+      checkAnswer(activeColor, activeSum); // Call the function to validate 
     }
   });
 }
 // Function to check the user's answer
-function checkAnswer(actColor, actDices) {
+function checkAnswer(actColor, sum) {
+  // Remove the event listeners
+  $("#roll, #dices").off("click");
+  $(document).off("keydown");
+  $("#roll").hide();
+  $("#result-text").empty(); // Clear the result text
   let input = $("#answer").val();
-  let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
-  let sum = actDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
-  //console.log(`Sum of active dices: ${sum}, active color:${actColor}`); 
-  let correct = userAnswer === sum; // Check if the user answer is correct
+  let userAnswer = parseInt(input); // Get the user's answer from the input field
+  console.log(`Sum of active dices: ${sum}, active color:${actColor}`);
   const resultText = `The sum of <span>${actColor}</span> dices is ${sum}`;
-
-  if (correct) {
+  if (userAnswer === sum) {
+    $("#input").hide(); // Hide the input field
     $("#result-text").html(`Correct! ${resultText}`);
-    $("#input").hide();
+    $("#result-text>span").css("color", actColor);
     correctScore(); // Call the function to update the score
     $("#question").text("Roll the dices to start again.");
-  } else if (input === "" || isNaN(input) || userAnswer <= 0) {
-    $("#result-text").text("Please enter a valid number.");
+    return start();
+  } else if (userAnswer <= 0 && input !== "") {
+    $("#result-text").text("Please enter a positive number.");
+    $("#answer").val(""); // Clear the input field
+    return false;
+  } else if (input === "" || isNaN(input)) {
+    $("#answer").val(""); // Clear the input field
+    $("#result-text").text("Please enter a number.");
+    return false;
   } else {
+    $("#input").hide();
     $("#result-text").html(`Incorrect! ${resultText}`);
-    $("#input").hide(); // Hide the input field after incorrect answer
+    $("#result-text>span").css("color", actColor);
     $("#question").text("Roll the dices to start again.");
+    return start();
   }
-  $("#result-text>span").css("color", actColor);
+  
   console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
-  game(); 
 }
 
 // Function to update the score

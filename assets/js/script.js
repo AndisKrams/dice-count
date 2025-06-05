@@ -93,26 +93,26 @@ function rollDice() {
   $("#question>strong").css("color", questionColor);
   activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   //console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
-  
   answer();
   function answer() {
-    $("#submit-button").on("click", function (e) {
+     $("#submit-button").on("click", function (e) {
       e.preventDefault(); // Prevent default form submission
       checkAnswer(activeColor, activeSum);
+      $("#submit-button").off("click");
     });
     $("#answer").on("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
         checkAnswer(activeColor, activeSum);
+        $("#answer").off("keydown");
       }
-    });
+    });   
   }
 }
 // Function to check the user's answer
 function checkAnswer(actColor, sum) {
-  // Remove the event listeners
+  // Remove the event listeners12
   $("#roll, #dices").off("click");
-  $(document).off("keydown");
   $("#roll").hide();
   $("#result-text").empty(); // Clear the result text
   let input = $("#answer").val();
@@ -131,12 +131,12 @@ function checkAnswer(actColor, sum) {
     $("#result-text").text("Please enter a positive number.");
     $("#answer").val(""); // Clear the input field
     $("#answer").focus(); // Focus back on the input field
-    return false;
+    //checkAnswer()
   } else if (input === "" || isNaN(input)) {
     $("#answer").val(""); // Clear the input field
     $("#result-text").text("Please enter a number.");
     $("#answer").focus(); // Focus back on the input field
-    return false;
+    //answer();
   } else {
     $("#input").hide();
     $("#result-text").html(`Incorrect! ${resultText}`);

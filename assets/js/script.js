@@ -31,7 +31,7 @@ function rollDice() {
   let activeColor = ""; // Variable to hold the active color of the dices
   let activeDices = []; // Array to hold the active dices based on the active color
   let questionColor = ""; // Variable to hold the color used in the question
-  let activeSum = null; // Variable to hold the sum of active dices
+  let activeSum = 0; // Variable to hold the sum of active dices
 
   // Remove the event listeners
   $("#roll, #dices").off("click");
@@ -85,14 +85,15 @@ function rollDice() {
     return randomColors[index] === activeColor;
   });
   questionColor = colors[Math.floor(Math.random() * colors.length)];
-  console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
+  //console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
   //Randomly assigns color in the question
   $("#question>strong").css("color", questionColor);
   activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
-  console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
+  //console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
+  
   answer();
   function answer() {
     $("#submit-button").on("click", function (e) {
@@ -106,11 +107,6 @@ function rollDice() {
       }
     });
   }
-  /*function answer() {
-    if ($("#submit-button").click === true) {
-      return checkAnswer(activeColor, activeSum);
-    }
-  }*/
 }
 // Function to check the user's answer
 function checkAnswer(actColor, sum) {
@@ -149,8 +145,6 @@ function checkAnswer(actColor, sum) {
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
   }
-
-
 }
 
 // Function to update the score

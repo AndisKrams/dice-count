@@ -39,7 +39,6 @@ function rollDice() {
   $("#input").show(); // Show the input field
   $("#result-text").empty();
   $("#answer").focus().val(""); // Clear the input field
-  $("#submit-button").click(checkAnswer); // Attach click event to the submit button
 
   // Generate random dices values based on the range input value
   let totalDices = parseInt($("#dicesRange").val()); // Get the number of dices from the range input

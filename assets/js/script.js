@@ -31,7 +31,7 @@ function rollDice() {
   let activeColor = ""; // Variable to hold the active color of the dices
   let activeDices = []; // Array to hold the active dices based on the active color
   let questionColor = ""; // Variable to hold the color used in the question
-  let activeSum = 0; // Variable to hold the sum of active dices
+  let sum = 0; // Variable to hold the sum of active dices
 
   // Remove the event listeners
   $("#roll, #dices").off("click");
@@ -91,38 +91,37 @@ function rollDice() {
   );
   //Randomly assigns color in the question
   $("#question>strong").css("color", questionColor);
-  activeSum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
+  sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   //console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
   answer();
   function answer() {
      $("#submit-button").on("click", function (e) {
       e.preventDefault(); // Prevent default form submission
-      checkAnswer(activeColor, activeSum);
+      checkAnswer();
       $("#submit-button").off("click");
     });
     $("#answer").on("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
-        checkAnswer(activeColor, activeSum);
+        checkAnswer();
         $("#answer").off("keydown");
       }
     });   
   }
-}
-// Function to check the user's answer
-function checkAnswer(actColor, sum) {
-  // Remove the event listeners12
+  // Function to check the user's answer
+function checkAnswer() {
+  // Remove the event listeners
   $("#roll, #dices").off("click");
   $("#roll").hide();
   $("#result-text").empty(); // Clear the result text
   let input = $("#answer").val();
   let userAnswer = parseInt(input); // Get the user's answer from the input field
-  console.log(`Sum of active dices: ${sum}, active color:${actColor}`);
-  const resultText = `The sum of <span>${actColor}</span> dices is ${sum}`;
+  console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
+  const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
   if (userAnswer === sum) {
     $("#input").hide(); // Hide the input field
     $("#result-text").html(`Correct! ${resultText}`);
-    $("#result-text>span").css("color", actColor);
+    $("#result-text>span").css("color", activeColor);
     correctScore(); // Call the function to update the score
     $("#question").text("Roll the dices to start again.");
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
@@ -131,21 +130,25 @@ function checkAnswer(actColor, sum) {
     $("#result-text").text("Please enter a positive number.");
     $("#answer").val(""); // Clear the input field
     $("#answer").focus(); // Focus back on the input field
+    return false;
     //checkAnswer()
   } else if (input === "" || isNaN(input)) {
     $("#answer").val(""); // Clear the input field
     $("#result-text").text("Please enter a number.");
     $("#answer").focus(); // Focus back on the input field
+    return false;
     //answer();
   } else {
     $("#input").hide();
     $("#result-text").html(`Incorrect! ${resultText}`);
-    $("#result-text>span").css("color", actColor);
+    $("#result-text>span").css("color", activeColor);
     $("#question").text("Roll the dices to start again.");
     console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
     return start();
   }
 }
+}
+
 
 // Function to update the score
 function correctScore() {

@@ -97,24 +97,26 @@ function rollDice() {
     $("#submit-button").on("click", function (e) {
       e.preventDefault(); // Prevent default form submission
       checkAnswer();
-      $("#submit-button").off("click");
-      $("#answer").off("keydown");
+      eventOff();
     });
     $("#answer").on("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
         checkAnswer();
-        $("#submit-button").off("click");
-        $("#answer").off("keydown");
+        eventOff();
       }
     });
 
   }
+  function eventOff() {
+    $("#submit-button").off("click");
+    $("#answer").off("keydown");
+  }
+
   // Function to check the user's answer
   function checkAnswer() {
     // Remove the event listeners
     $("#roll, #dices").off("click");
-    $("#roll").hide();
     $("#result-text").empty(); // Clear the result text
     let input = $("#answer").val();
     let userAnswer = parseInt(input); // Get the user's answer from the input field

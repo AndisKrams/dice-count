@@ -19,7 +19,7 @@ function start() {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
-
+      
     }
   });
 }
@@ -31,7 +31,7 @@ function rollDice() {
   let activeDices = []; // Array to hold the active dices based on the active color
   let questionColor = ""; // Variable to hold the color used in the question
   let sum = 0; // Variable to hold the sum of active dices
-
+  $("h1").hide();
   // Remove the event listeners
   $("#play").hide();
   $("#roll, #dices").off("click");

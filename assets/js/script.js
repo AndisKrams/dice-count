@@ -71,7 +71,7 @@ function rollDice() {
     let randomColor = colors[Math.floor(Math.random() * colors.length)];
     randomColors.push(randomColor); // Add the random color to the array
   }
-  //randomize dices
+  //randomize dices display
   randomColors.forEach((randomColor, index) => {
     let dice = dices[index];
     $(`#dice${index + 1}`).html('<span class="pip"></span>'.repeat(dice));
@@ -102,7 +102,8 @@ function rollDice() {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
         validateInput();
-    }});
+      }
+    });
   }
   function validateInput() {
     let input = $("#answer").val();
@@ -131,7 +132,7 @@ function rollDice() {
       $("#input").hide(); // Hide the input field
       $("#result-text").html(`Correct! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
-      correct(); // Call the function to update the score
+      updateScore("correct"); // Update the correct score
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
@@ -139,7 +140,7 @@ function rollDice() {
       $("#input").hide();
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
-      incorrect();
+      updateScore("incorrect");
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
@@ -147,19 +148,22 @@ function rollDice() {
   }
 }
 // Functions to update the score
-function correct() {
-  let correct = parseInt($("#correct span").text()) || 0;
-  correct += 1; // Increment the score by 1
-  $("#correct span").text(correct); // Update the score display
+function updateScore(type) {
+  let score = parseInt($(`#${type} span`).text()) || 0;
+  score += 1; // Increment the score by 1
+  $(`#${type} span`).text(score); // Update the score display
 }
-function incorrect() {
-  let incorrect = parseInt($("#incorrect span").text()) || 0;
-  incorrect += 1; // Increment the score by 1
-  $("#incorrect span").text(incorrect); // Update the score display
+let correct = 0;
+const correctSpan = $("#correct span");
+if (correctSpan.length && !isNaN(parseInt(correctSpan.text()))) {
+  correct = parseInt(correctSpan.text());
 }
-
-/* Function to start the timer
-function timer() {
+let incorrect = 0;
+const incorrectSpan = $("#incorrect span");
+if (incorrectSpan.length && !isNaN(parseInt(incorrectSpan.text()))) {
+  incorrect = parseInt(incorrectSpan.text());
+}
+/*function timer() {
   let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
   const timerElement = $("#seconds");
   timerElement.text(timeLeft);

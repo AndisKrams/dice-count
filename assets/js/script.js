@@ -111,6 +111,7 @@ function rollDice() {
     let input = $("#answer").val();
     if (input === "" || isNaN(input) || parseInt(input) <= 0) {
       $("#result-text").text("Please enter a valid number.");
+      $("#answer").val("");
     } else {
       checkAnswer(); // Call the function to check the answer
       eventOff();
@@ -137,16 +138,6 @@ function rollDice() {
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
-    /*} else if (userAnswer <= 0) {
-      $("#result-text").text("Please enter a positive number.");
-      $("#answer").val(""); // Clear the input field
-      $("#answer").focus(); // Focus back on the input field
-      
-    } else if (input === "" || isNaN(input)) {
-      $("#answer").val(""); // Clear the input field
-      $("#result-text").text("Please enter a number.");
-      $("#answer").focus(); // Focus back on the input field*/
-      
     } else {
       $("#input").hide();
       $("#result-text").html(`Incorrect! ${resultText}`);
@@ -157,8 +148,6 @@ function rollDice() {
     }
   }
 }
-
-
 // Function to update the score
 function correctScore() {
   let points = parseInt($("#score").text()) || 0;

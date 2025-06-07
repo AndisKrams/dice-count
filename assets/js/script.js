@@ -14,12 +14,13 @@ $(document).ready(function () {
   start(); // Start the game by listening for keydown events
 });
 function start() {
-  $("#roll").show(); // Show the roll button
+   // Show the roll button
   $("#roll, #dices").on("click", rollDice);
   $(document).on("keydown", function (e) {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
+      
     }
   });
 }
@@ -34,6 +35,7 @@ function rollDice() {
   let sum = 0; // Variable to hold the sum of active dices
 
   // Remove the event listeners
+  $("#play").hide();
   $("#roll, #dices").off("click");
   $(document).off("keydown");
   $("#input").show(); // Show the input field
@@ -122,8 +124,10 @@ function rollDice() {
 
   // Function to check the user's answer
   function checkAnswer() {
+    $("#play").show();
     // Remove the event listeners
-    $("#roll, #dices").off("click");
+
+    //$("#roll, #dices").off("click");
     $("#result-text").empty(); // Clear the result text
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);

@@ -1,73 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Dice count</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
+  <title>Dice count</title>
 
-  <body>
-    <h1>Count the dices</h1>
-    <p>Correct answers: <span id="score"></span></p>
-    <div class="slidecontainer">
-      <p><span id="seconds"></span> seconds</p>
-      <input
-        type="range"
-        min="3"
-        max="30"
-        value="5"
-        class="slider"
-        id="timerRange"
-      />
-    </div>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
 
-    <div class="container">
-      <p id="question"></p>
+<body>
+  <h1>Count the dices</h1>
+  <div id="score">
+    <div id="correct">
+      <p>Correct: <span>0</span></p>
     </div>
+    <div id="incorrect">
+      <p>Incorrect: <span>0</span></p>
+    </div>
+  </div>
 
-    <div class="slidecontainer">
-      <input
-        type="range"
-        min="20"
-        max="50"
-        value="20"
-        class="slider"
-        id="dicesRange"
-      />
-      <p>Number of dices for next roll: <span id="total-dices"></span></p>
-    </div>
+  <div class="slidecontainer">
+    <p><span id="seconds"></span> seconds</p>
+    <input type="range" min="3" max="30" value="5" class="slider" id="timerRange" />
+  </div>
 
-    <div id="dices" title="Click to roll the dices or press the space bar">
-      <p id="page-load">
-        Click here or press space bar to roll the dices. Count the dices of
-        specified colour. Use sliders to set timer and how many dices to roll.
-      </p>
-    </div>
-    <div class="container" id="play">
-      <button
-        id="roll"
-        class="btn btn-primary"
-        title="Click to roll the dices or press the space bar"
-      >
-        Roll
-      </button>
-    </div>
-    <div class="container" id="input">
-      <input id="answer" type="number"/>
-      <button id="submit-button" class="btn btn-secondary">Submit</button>
-    </div>
-    <div class="container" id="result">
-      <p id="result-text"></p>
-    </div>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
+  <div class="container">
+    <p id="question"></p>
+  </div>
 
-    <script src="assets/js/script.js"></script>
-  </body>
+  <div class="slidecontainer">
+    <input type="range" min="20" max="50" value="20" class="slider" id="dicesRange" />
+    <p>Number of dices for next roll: <span id="total-dices"></span></p>
+  </div>
+
+  <div id="dices" title="Click to roll the dices or press the space bar">
+    <p id="page-load">
+      Click here or press space bar to roll the dices. Count the dices of
+      specified colour. Use sliders to set timer and how many dices to roll.
+    </p>
+  </div>
+  <div class="container" id="play">
+    <button id="roll" class="btn btn-primary" title="Click to roll the dices or press the space bar">
+      Roll
+    </button>
+  </div>
+  <div class="container" id="input">
+    <input id="answer" type="number" />
+    <button id="submit-button" class="btn btn-secondary">Submit</button>
+  </div>
+  <div class="container" id="result">
+    <p id="result-text"></p>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <script src="assets/js/script.js"></script>
+</body>
+
 </html>

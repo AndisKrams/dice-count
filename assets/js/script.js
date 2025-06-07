@@ -92,9 +92,6 @@ function rollDice() {
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
 
-  //console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
-   
-
   answer();
   function answer() {
     $("#submit-button").on("click", function (e) {
@@ -134,7 +131,7 @@ function rollDice() {
       $("#input").hide(); // Hide the input field
       $("#result-text").html(`Correct! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
-      correctScore(); // Call the function to update the score
+      correct(); // Call the function to update the score
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
@@ -142,17 +139,23 @@ function rollDice() {
       $("#input").hide();
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
+      incorrect();
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     }
   }
 }
-// Function to update the score
-function correctScore() {
-  let points = parseInt($("#score").text()) || 0;
-  points += 1; // Increment the score by 1
-  $("#score").text(points); // Update the score display
+// Functions to update the score
+function correct() {
+  let correct = parseInt($("#correct span").text()) || 0;
+  correct += 1; // Increment the score by 1
+  $("#correct span").text(correct); // Update the score display
+}
+function incorrect() {
+  let incorrect = parseInt($("#incorrect span").text()) || 0;
+  incorrect += 1; // Increment the score by 1
+  $("#incorrect span").text(incorrect); // Update the score display
 }
 
 /* Function to start the timer

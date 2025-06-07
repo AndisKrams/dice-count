@@ -106,7 +106,7 @@ function rollDice() {
   }
   function validateInput() {
     let input = $("#answer").val();
-    if (input === "" || isNaN(input) || parseInt(input) <= 0) {
+    if (input === "" || Number.isNaN(input) || parseInt(input) <= 0) {
       $("#result-text").text("Please enter a valid number.");
       $("#answer").val("");
     } else {

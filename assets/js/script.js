@@ -4,7 +4,6 @@ $(document).ready(function () {
   $("#timerRange").on("input", function () {
     $("#seconds").text($("#timerRange").val());
   });
-
   //dices range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -14,17 +13,16 @@ $(document).ready(function () {
   start(); // Start the game by listening for keydown events
 });
 function start() {
-   // Show the roll button
+  // Show the roll button
   $("#roll, #dices").on("click", rollDice);
   $(document).on("keydown", function (e) {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
-      
+
     }
   });
 }
-
 // Function to roll the dices and display results
 function rollDice() {
   let dices = []; // Array to hold the random dice values
@@ -56,7 +54,6 @@ function rollDice() {
     const diceElement = $(`<div class="dice" id="dice${index + 1}"></div>`);
     $("#dices").append(diceElement);
   });
-
   //randomize colors
   const colors = [
     "red",
@@ -85,12 +82,11 @@ function rollDice() {
   activeDices = dices.filter(function (_dice, index) {
     return randomColors[index] === activeColor;
   });
-  questionColor = colors[Math.floor(Math.random() * colors.length)];
-  //console.log(`Active color: ${activeColor}, Active dices: ${activeDices}`);
   $("#question").html(
     `What is the sum of all <strong>${activeColor}</strong> dices?`
   );
   //Randomly assigns color in the question
+  questionColor = colors[Math.floor(Math.random() * colors.length)];
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
 
@@ -126,8 +122,6 @@ function rollDice() {
   function checkAnswer() {
     $("#play").show();
     // Remove the event listeners
-
-    //$("#roll, #dices").off("click");
     $("#result-text").empty(); // Clear the result text
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);

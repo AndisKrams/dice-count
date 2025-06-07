@@ -91,22 +91,30 @@ function rollDice() {
   //Randomly assigns color in the question
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
+
   //console.log(`Sum of active dices: ${activeSum}, Active color: ${activeColor}`);
+   
+
   answer();
   function answer() {
     $("#submit-button").on("click", function (e) {
       e.preventDefault(); // Prevent default form submission
-      checkAnswer();
-      eventOff();
+      validateInput();
     });
     $("#answer").on("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Prevent form submission on Enter key
-        checkAnswer();
-        eventOff();
-      }
-    });
-
+        validateInput();
+    }});
+  }
+  function validateInput() {
+    let input = $("#answer").val();
+    if (input === "" || isNaN(input) || parseInt(input) <= 0) {
+      $("#result-text").text("Please enter a valid number.");
+    } else {
+      checkAnswer(); // Call the function to check the answer
+      eventOff();
+    }
   }
   function eventOff() {
     $("#submit-button").off("click");
@@ -118,8 +126,7 @@ function rollDice() {
     // Remove the event listeners
     $("#roll, #dices").off("click");
     $("#result-text").empty(); // Clear the result text
-    let input = $("#answer").val();
-    let userAnswer = parseInt(input); // Get the user's answer from the input field
+    let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
     if (userAnswer === sum) {
@@ -130,18 +137,16 @@ function rollDice() {
       $("#question").text("Roll the dices to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
-    } else if (userAnswer <= 0) {
+    /*} else if (userAnswer <= 0) {
       $("#result-text").text("Please enter a positive number.");
       $("#answer").val(""); // Clear the input field
       $("#answer").focus(); // Focus back on the input field
-      return false;
-      //checkAnswer()
+      
     } else if (input === "" || isNaN(input)) {
       $("#answer").val(""); // Clear the input field
       $("#result-text").text("Please enter a number.");
-      $("#answer").focus(); // Focus back on the input field
-      return false;
-      //answer();
+      $("#answer").focus(); // Focus back on the input field*/
+      
     } else {
       $("#input").hide();
       $("#result-text").html(`Incorrect! ${resultText}`);

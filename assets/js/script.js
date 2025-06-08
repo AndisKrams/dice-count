@@ -34,14 +34,13 @@ function rollDice() {
   let sum = 0; // Variable to hold the sum of active dices
   $("h1").hide();
   $("#score").show();
-  // Remove the event listeners
   $("#play").hide();
+  // Remove the event listeners
   $("#roll, #dices").off("click");
   $(document).off("keydown");
   $("#input").show(); // Show the input field
-  $("#result-text").empty();
   $("#answer").focus().val(""); // Clear the input field
-
+  $("#result-text").empty();
   // Generate random dices values based on the range input value
   let totalDices = parseInt($("#dicesRange").val()); // Get the number of dices from the range input
   for (let i = 0; i < totalDices; i++) {
@@ -91,7 +90,7 @@ function rollDice() {
   questionColor = colors[Math.floor(Math.random() * colors.length)];
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
-
+  
   answer();
   function answer() {
     $("#submit-button").on("click", function (e) {
@@ -119,17 +118,14 @@ function rollDice() {
     $("#submit-button").off("click");
     $("#answer").off("keydown");
   }
-
   // Function to check the user's answer
   function checkAnswer() {
     $("#play").show();
-    // Remove the event listeners
-    $("#result-text").empty(); // Clear the result text
+    $("#input").hide(); // Hide the input field
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
     if (userAnswer === sum) {
-      $("#input").hide(); // Hide the input field
       $("#result-text").html(`Correct! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
       updateScore("correct"); // Update the correct score
@@ -137,7 +133,6 @@ function rollDice() {
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     } else {
-      $("#input").hide();
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
       updateScore("incorrect");
@@ -180,6 +175,7 @@ if (incorrectSpan.length && !isNaN(parseInt(incorrectSpan.text()))) {
       $("#result-text").html("Time's up! Please try again.");
       $("#input").hide(); //Prevent input after time is up
       $("#question").text("Roll the dices to start again.");
+      return start();
     }
   }, 1000);
 }*/

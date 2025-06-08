@@ -39,6 +39,7 @@ p {
     background-color: black;
 }
 
+/* Dices display */
 .dice {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
@@ -128,6 +129,7 @@ p {
     cursor: pointer;
 }
 
+/*Colour of an initial text*/
 #page-load {
     color: white;
 }
@@ -145,4 +147,21 @@ p {
 
 #incorrect p {
     color: red;
+}
+
+@media screen and (max-width: 425px),
+(max-height: 425px) {
+    .dice {
+        margin: 5px;
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .pip {
+        width: calc(30% * 40px);
+        /* Assuming 40px is the intended width of the face */
+        height: calc(30% * 40px);
+        margin: 1px;
+    }
 }

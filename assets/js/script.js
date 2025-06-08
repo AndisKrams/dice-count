@@ -90,7 +90,7 @@ function rollDice() {
   questionColor = colors[Math.floor(Math.random() * colors.length)];
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
-  
+  // Input answer
   answer();
   function answer() {
     $("#submit-button").on("click", function (e) {
@@ -144,19 +144,13 @@ function rollDice() {
 }
 // Functions to update the score
 function updateScore(type) {
+  if (type !== "correct" && type !== "incorrect") {
+    console.error(`Invalid type: ${type}. Expected "correct" or "incorrect".`);
+    return;
+  }
   let score = parseInt($(`#${type} span`).text()) || 0;
   score += 1; // Increment the score by 1
   $(`#${type} span`).text(score); // Update the score display
-}
-let correct = 0;
-const correctSpan = $("#correct span");
-if (correctSpan.length && !isNaN(parseInt(correctSpan.text()))) {
-  correct = parseInt(correctSpan.text());
-}
-let incorrect = 0;
-const incorrectSpan = $("#incorrect span");
-if (incorrectSpan.length && !isNaN(parseInt(incorrectSpan.text()))) {
-  incorrect = parseInt(incorrectSpan.text());
 }
 /*function timer() {
   let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds

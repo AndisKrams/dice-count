@@ -1,9 +1,10 @@
 html,
-body{
-   height: 100%;
-   margin: 0;
-   align-items: center;
+body {
+    height: 100%;
+    margin: 0;
+    align-items: center;
 }
+
 body {
     align-items: center;
     text-align: center;
@@ -11,10 +12,12 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
 p {
     margin: 0;
     font-size: 2em;
 }
+
 .container {
     display: flex;
     justify-content: center;
@@ -22,10 +25,10 @@ p {
     text-align: center;
     padding: 20px;
     background-color: gray
-
 }
 
 #dices {
+    align-self: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -90,41 +93,56 @@ p {
 .slidecontainer {
     width: 100%;
 }
+
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    /* Full-width */
+    height: 25px;
+    /* Specified height */
+    background: #d3d3d3;
+    /* Grey background */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
 }
+
 .slider:hover {
-  opacity: 1; /* Fully shown on hover */
+    opacity: 1;
+    /* Fully shown on hover */
 }
+
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 20%;
-  background: black;
-  cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 20%;
+    background: black;
+    cursor: pointer;
 }
+
 #page-load {
     color: white;
 }
+
 #score {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     justify-content: space-evenly;
 }
+
 #correct p {
     color: green;
 }
+
 #incorrect p {
     color: red;
 }

@@ -35,6 +35,7 @@ function rollDice() {
   $("h1").hide();
   $("#score").show();
   $("#play").hide();
+  $("#dices-slider").hide();
   // Remove the event listeners
   $("#roll, #dices").off("click");
   $(document).off("keydown");
@@ -122,6 +123,7 @@ function rollDice() {
   function checkAnswer() {
     $("#play").show();
     $("#input").hide(); // Hide the input field
+    $("#dices-slider").show();
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
     const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;

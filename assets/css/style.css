@@ -63,7 +63,8 @@ p {
     height: calc(30% * 50px);
     /* Assuming 50px is the intended height of the face */
     border-radius: 50%;
-    margin: 2px;
+    /*margin: 2px;*/
+    margin: calc(2px);
     background-color: black;
 }
 
@@ -162,6 +163,6 @@ p {
         width: calc(30% * 40px);
         /* Assuming 40px is the intended width of the face */
         height: calc(30% * 40px);
-        margin: 1px;
+        margin: calc(1.5px);        
     }
 }

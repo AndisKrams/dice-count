@@ -9,6 +9,7 @@ $(document).ready(function () {
   $("#dicesRange").on("input", function () {
     $("#total-dices").text($(this).val());
   });
+  $("#score").hide();
   $("#input").hide(); // Hide the input field initially
   start(); // Start the game by listening for keydown events
 });
@@ -32,6 +33,7 @@ function rollDice() {
   let questionColor = ""; // Variable to hold the color used in the question
   let sum = 0; // Variable to hold the sum of active dices
   $("h1").hide();
+  $("#score").show();
   // Remove the event listeners
   $("#play").hide();
   $("#roll, #dices").off("click");

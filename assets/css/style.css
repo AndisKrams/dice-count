@@ -87,14 +87,6 @@ p {
     grid-area: g;
 }
 
-/*#question {
-    font-size: 2em;
-    text-align: center;
-}
-#result-text {
-    font-size: 2em;
-    text-align: center;
-}*/
 .slidecontainer {
     width: 100%;
 }
@@ -123,4 +115,16 @@ p {
 }
 #page-load {
     color: white;
+}
+#score {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+#correct p {
+    color: green;
+}
+#incorrect p {
+    color: red;
 }

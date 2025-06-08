@@ -145,6 +145,10 @@ p {
 
 button, #answer {
     font-size: 1.5em;
+    margin: 5px;
+}
+#answer {
+    width: 90px;
 }
 @media screen and (max-width: 425px),
 (max-height: 425px) {

@@ -129,11 +129,6 @@ p {
     cursor: pointer;
 }
 
-/*Colour of an initial text*/
-#page-load {
-    color: white;
-}
-
 #score {
     display: flex;
     flex-wrap: wrap;
@@ -144,11 +139,13 @@ p {
 #correct p {
     color: green;
 }
-
 #incorrect p {
     color: red;
 }
 
+button, #answer {
+    font-size: 1.5em;
+}
 @media screen and (max-width: 425px),
 (max-height: 425px) {
     .dice {
@@ -162,6 +159,6 @@ p {
         width: calc(30% * 40px);
         /* Assuming 40px is the intended width of the face */
         height: calc(30% * 40px);
-        margin: calc(1.5px);        
+        margin: 1.5px;        
     }
 }

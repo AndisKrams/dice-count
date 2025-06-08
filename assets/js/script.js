@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  // Timer display
+  /* Timer display
   $("#seconds").text($("#timerRange").val());
   $("#timerRange").on("input", function () {
     $("#seconds").text($("#timerRange").val());
-  });
+  });*/
   //dices range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -20,7 +20,7 @@ function start() {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
-      
+
     }
   });
 }

@@ -4,7 +4,7 @@ $(document).ready(function () {
   $("#timerRange").on("input", function () {
     $("#seconds").text($("#timerRange").val());
   });*/
-  //dices range
+  //dice range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
     $("#total-dices").text($(this).val());
@@ -127,19 +127,19 @@ function rollDice() {
     $("#total-dices").css("color", questionColor);
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
-    const resultText = `The sum of <span>${activeColor}</span> dices is ${sum}`;
+    const resultText = `The sum of <span>${activeColor}</span> dice is ${sum}`;
     if (userAnswer === sum) {
       $("#result-text").html(`Correct! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
       updateScore("correct"); // Update the correct score
-      $("#question").text("Roll the dices to start again.");
+      $("#question").text("Roll the dice to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
       $("#result-text>span").css("color", activeColor);
       updateScore("incorrect");
-      $("#question").text("Roll the dices to start again.");
+      $("#question").text("Roll the dice to start again.");
       console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     }

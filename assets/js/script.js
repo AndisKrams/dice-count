@@ -1,9 +1,4 @@
 $(document).ready(function () {
-  /* Timer display
-  $("#seconds").text($("#timerRange").val());
-  $("#timerRange").on("input", function () {
-    $("#seconds").text($("#timerRange").val());
-  });*/
   //dice range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -20,7 +15,6 @@ function start() {
     if (e.key === " " || e.key === "Spacebar") {
       e.preventDefault(); // Prevent default action for spacebar
       rollDice(); // Call the function to roll the dices
-
     }
   });
 }
@@ -76,7 +70,7 @@ function rollDice() {
   randomColors.forEach((randomColor, index) => {
     let dice = dices[index];
     $(`#dice${index + 1}`).html('<span class="pip"></span>'.repeat(dice));
-    if (randomColor === "blue"){
+    if (randomColor === "blue") {
       randomColor = "lightskyblue";
     }
     $(`#dice${index + 1}`).css("background-color", randomColor);
@@ -92,9 +86,9 @@ function rollDice() {
   );
   //Randomly assigns color in the question
   questionColor = colors[Math.floor(Math.random() * colors.length)];
-  if (questionColor === "blue"){
-      questionColor = "lightskyblue";
-    }
+  if (questionColor === "blue") {
+    questionColor = "lightskyblue";
+  }
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   // Input answer
@@ -130,7 +124,7 @@ function rollDice() {
     $("#play").show();
     $("#input").hide(); // Hide the input field
     $("#dices-slider").show();
-    if (questionColor === "blue"){
+    if (questionColor === "blue") {
       questionColor = "lightskyblue";
     }
     $("#total-dices").css("color", questionColor);
@@ -139,9 +133,9 @@ function rollDice() {
     const resultText = `The sum of <span>${activeColor}</span> dice is ${sum}`;
     if (userAnswer === sum) {
       $("#result-text").html(`Correct! ${resultText}`);
-      if (activeColor === "blue"){
-      activeColor = "lightskyblue";
-    }
+      if (activeColor === "blue") {
+        activeColor = "lightskyblue";
+      }
       $("#result-text>span").css("color", activeColor);
       updateScore("correct"); // Update the correct score
       $("#question").text("Roll the dice to start again.");
@@ -149,9 +143,9 @@ function rollDice() {
       return start();
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
-      if (activeColor === "blue"){
-      activeColor = "lightskyblue";
-    }
+      if (activeColor === "blue") {
+        activeColor = "lightskyblue";
+      }
       $("#result-text>span").css("color", activeColor);
       updateScore("incorrect");
       $("#question").text("Roll the dice to start again.");
@@ -170,24 +164,3 @@ function updateScore(type) {
   score += 1; // Increment the score by 1
   $(`#${type} span`).text(score); // Update the score display
 }
-/*function timer() {
-  let timeLeft = $("#timerRange").val(); // Set the timer duration in seconds
-  const timerElement = $("#seconds");
-  timerElement.text(timeLeft);
-  $("#timerRange").on("input", function () {
-    timeLeft = $(this).val();
-    timerElement.text(timeLeft);
-  });
-
-  const interval = setInterval(() => {
-    timeLeft--;
-    timerElement.text(timeLeft);
-    if (timeLeft <= 0) {
-      clearInterval(interval);
-      $("#result-text").html("Time's up! Please try again.");
-      $("#input").hide(); //Prevent input after time is up
-      $("#question").text("Roll the dices to start again.");
-      return start();
-    }
-  }, 1000);
-}*/

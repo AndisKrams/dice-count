@@ -28,10 +28,10 @@ To solve this issue I tried to restructure the code by moving the nested functio
 
 Adding the function that sets off both event listeners for input solved the issue with recurring values, but this prevented repeated input in case of empty or invalid input. To deal with it I restructured the code so that the function to validate input is called before the answer is checked and event listeners are set off.
 
+After testing JavaScript code I did styling and cleaning of the code.
+
 ## Design choices
 
-
-## Typography
 
 
 ## Technologies used
@@ -41,8 +41,11 @@ Adding the function that sets off both event listeners for input solved the issu
 
 ## Testing
 
-Uncaught ReferenceError: $ is not defined
-    at script.js:1:1
+At the start of the project I relied on console error messages to spot bugs. First one was: Uncaught ReferenceError: $ is not defined. That was caused by jquery link in index.html being located after script.js.
+
+During the development process I continued to look for reference errors in the console after implementing changes. There were few instances of not defined variables. To solve them I checked spellings of variable names and looked at the scope of functions.
+
+Implementation of the checkAnswer function started to give wrong feedback on manual functionality tests and the console started to show forced reflow violation, indicating that code of the game starts to slow down after repeated rolls. Logging variables in different locations of the code showed repetition of variables generated in previous dice rolls. The reason for this occurrence was unclosed event listeners. Finally adding closures of two event listeners after each of them resolved this issue.
 
 ### Manual
 
@@ -78,6 +81,4 @@ The live link can be found here - <https://andiskrams.github.io/dice-count/>
 * To create dice display HTML and CSS I used this article -  <https://dev.to/ekeijl/creating-dice-using-css-grid-j4>
 * Range slider is built using this tutorial - <https://www.w3schools.com/howto/howto_js_rangeslider.asp>
 
-### Fonts
-
-Fonts from <https://fonts.google.com/>
+* Font "Faculty Glyphic" by Koto Studio from <https://fonts.google.com/>

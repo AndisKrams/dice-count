@@ -54,7 +54,7 @@ Uncaught ReferenceError: $ is not defined
 
 #### HTML
 
-<https://validator.w3.org> 
+Code passed validation without any errors at <https://validator.w3.org>
 
 #### CSS
 

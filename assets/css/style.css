@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap');
+
 html,
 body {
+    font-family: "Faculty Glyphic", sans-serif;
     height: 100%;
     margin: 0;
     align-items: center;
@@ -16,10 +19,12 @@ body {
 }
 
 p {
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 5px;
 }
-
+#page-load {
+    font-size: 2em;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -40,7 +45,7 @@ p {
     background-color: black;
 }
 
-/* Dices display */
+/* Dice display */
 .dice {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);

@@ -85,7 +85,7 @@ function rollDice() {
     return randomColors[index] === activeColor;
   });
   $("#question").html(
-    `What is the sum of all <strong>${activeColor}</strong> dices?`
+    `What is the sum of all <strong>${activeColor}</strong> dice?`
   );
   //Randomly assigns color in the question
   questionColor = colors[Math.floor(Math.random() * colors.length)];

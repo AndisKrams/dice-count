@@ -22,9 +22,11 @@ p {
     font-size: 1.5em;
     margin: 5px;
 }
+
 #page-load {
     font-size: 2em;
 }
+
 .container {
     display: flex;
     justify-content: center;
@@ -64,12 +66,9 @@ p {
 
 .pip {
     display: block;
-    width: calc(30% * 50px);
-    /* Assuming 50px is the intended width of the face */
-    height: calc(30% * 50px);
-    /* Assuming 50px is the intended height of the face */
+    width: 12.66px;
+    height: 12.66px;
     border-radius: 50%;
-    /*margin: 2px;*/
     margin: calc(2px);
     background-color: black;
 }
@@ -144,17 +143,21 @@ p {
 #correct p {
     color: green;
 }
+
 #incorrect p {
     color: red;
 }
 
-button, #answer {
+button,
+#answer {
     font-size: 1.5em;
     margin: 5px;
 }
+
 #answer {
     width: 90px;
 }
+
 @media screen and (max-width: 425px),
 (max-height: 425px) {
     .dice {
@@ -165,9 +168,8 @@ button, #answer {
     }
 
     .pip {
-        width: calc(30% * 40px);
-        /* Assuming 40px is the intended width of the face */
-        height: calc(30% * 40px);
-        margin: 1.5px;        
+        width: 10.33px;
+        height: 10.33px;
+        margin: 1.5px;
     }
 }

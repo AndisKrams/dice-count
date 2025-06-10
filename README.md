@@ -15,6 +15,10 @@ For the site's owner, wishing to further develop the game with additional featur
 
 ## Site features
 
+Games website consists of the dice display area sandwiched between the question display and answer submit areas. Clicking on the dice area activates dice roll function. On top of the dice area is a slider for changing the amount of dice rolled.  At the top of the page there is a score display and at the bottom area for feedback. Buttons and the input field become invisible when not used. On page load instead of a dice display there is a short explanation of game features. The header from top disappears after the game is started.
+![question display](assets/images/documentation/submit.JPG)
+![fedback](assets/images/documentation/feedback.JPG)
+![page load](assets/images/documentation/page-load.JPG)
 
 ### Potential features left to implement
 
@@ -33,7 +37,6 @@ After testing JavaScript code I did styling and cleaning of the code.
 ## Design choices
 
 
-
 ## Technologies used
 
 * HTML, CSS, Javascript, Jquery.
@@ -43,15 +46,13 @@ After testing JavaScript code I did styling and cleaning of the code.
 
 While automatic testing is significantly faster and more accurate, I didn’t use any test code for this relatively simple application which doesn't have many scenarios of events. Manual testing is more flexible and allows to take in account users' experience.
 
-At the start of the project I relied on console error messages to spot bugs. First one was: Uncaught ReferenceError: $ is not defined. That was caused by jquery link in index.html being located after script.js.
+At the start of the project I relied on console error messages to spot bugs. First one was: Uncaught ReferenceError: $ is not defined. ![reference error](assets/images/documentation/$not.JPG) That was caused by jquery link in index.html being located after script.js.
 
-During the development process I continued to look for reference errors in the console after implementing changes. There were few instances of not defined variables. To solve them I checked spellings of variable names and looked at the scope of functions.
+During the development process I continued to look for reference errors in the console after implementing changes. There were few instances of not defined variables. ![sum not defined](assets/images/documentation/refErr.JPG) ![_dice not defined](assets/images/documentation/_dice not def.JPG) To solve them I checked spellings of variable names and looked at the scope of functions.
 
-Implementation of the checkAnswer function started to give wrong feedback on manual functionality tests and the console started to show forced reflow violation, indicating that code of the game starts to slow down after repeated rolls. Logging variables in different locations of the code showed repetition of variables generated in previous dice rolls. The reason for this occurrence was unclosed event listeners. Finally adding closures of two event listeners after each of them resolved this issue.
-
-
-### Lighthouse
-
+Implementation of the checkAnswer function started to give wrong feedback on manual functionality tests and the console started to show forced reflow violation, ![forced reflow](assets/images/documentation/reflow.JPG) indicating that code of the game starts to slow down after repeated rolls. Logging variables in different locations of the code showed repetition of variables generated in previous dice rolls.
+![repeated variables](assets/images/documentation/repeat-sum.JPG)
+The reason for this occurrence was unclosed event listeners. Finally adding closures of two event listeners after each of them resolved this issue.
 
 ### Validators
 
@@ -61,11 +62,17 @@ Code passed validation without any errors at <https://validator.w3.org>
 
 #### CSS
 
+<https://jigsaw.w3.org/css-validator/> showd errors caused from use of calc() with % for width and height:
+
+![css jigsaw](assets/images/documentation/css.JPG)
+
 #### JavaScript
 
+In the process of development I regularly passed code through jslint.com linter to identify syntax issues and errors. Near the end of the project I installed ESLint in VS Code and checked that the final version of JS contains no errors.
 
 ### Unsolved bugs
 
+There are no identified bugs in the implemented website.
 
 ## Deployment
 

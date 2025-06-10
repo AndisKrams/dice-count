@@ -76,6 +76,9 @@ function rollDice() {
   randomColors.forEach((randomColor, index) => {
     let dice = dices[index];
     $(`#dice${index + 1}`).html('<span class="pip"></span>'.repeat(dice));
+    if (randomColor === "blue"){
+      randomColor = "lightskyblue";
+    }
     $(`#dice${index + 1}`).css("background-color", randomColor);
   });
   //actve colour
@@ -89,6 +92,9 @@ function rollDice() {
   );
   //Randomly assigns color in the question
   questionColor = colors[Math.floor(Math.random() * colors.length)];
+  if (questionColor === "blue"){
+      questionColor = "lightskyblue";
+    }
   $("#question>strong").css("color", questionColor);
   sum = activeDices.reduce((acc, curr) => acc + curr, 0); // Calculate the sum of active dices
   // Input answer
@@ -124,12 +130,18 @@ function rollDice() {
     $("#play").show();
     $("#input").hide(); // Hide the input field
     $("#dices-slider").show();
+    if (questionColor === "blue"){
+      questionColor = "lightskyblue";
+    }
     $("#total-dices").css("color", questionColor);
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
     console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
     const resultText = `The sum of <span>${activeColor}</span> dice is ${sum}`;
     if (userAnswer === sum) {
       $("#result-text").html(`Correct! ${resultText}`);
+      if (activeColor === "blue"){
+      activeColor = "lightskyblue";
+    }
       $("#result-text>span").css("color", activeColor);
       updateScore("correct"); // Update the correct score
       $("#question").text("Roll the dice to start again.");
@@ -137,6 +149,9 @@ function rollDice() {
       return start();
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
+      if (activeColor === "blue"){
+      activeColor = "lightskyblue";
+    }
       $("#result-text>span").css("color", activeColor);
       updateScore("incorrect");
       $("#question").text("Roll the dice to start again.");

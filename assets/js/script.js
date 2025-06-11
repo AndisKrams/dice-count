@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   //dice range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -130,7 +129,6 @@ function rollDice() {
     }
     $("#total-dices").css("color", questionColor);
     let userAnswer = parseInt($("#answer").val()); // Get the user's answer from the input field
-    console.log(`Sum of active dices: ${sum}, active color:${activeColor}`);
     const resultText = `The sum of <span>${activeColor}</span> dice is ${sum}`;
     if (userAnswer === sum) {
       $("#result-text").html(`Correct! ${resultText}`);

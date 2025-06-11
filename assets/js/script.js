@@ -19,9 +19,6 @@ function start() {
   });
 }
 
-    if (window.location.pathname !== "/dice-count/index.html") {
-  window.location.href = "https://andiskrams.github.io/dice-count/";
-}
 // Function to roll the dices and display results
 function rollDice() {
   let dices = []; // Array to hold the random dice values

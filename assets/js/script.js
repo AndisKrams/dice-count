@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    if (window.location.pathname !== "/dice-count/index.html") {
-  window.location.href = "https://andiskrams.github.io/dice-count/";
-}
   //dice range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -20,6 +17,10 @@ function start() {
       rollDice(); // Call the function to roll the dices
     }
   });
+}
+
+    if (window.location.pathname !== "/dice-count/index.html") {
+  window.location.href = "https://andiskrams.github.io/dice-count/";
 }
 // Function to roll the dices and display results
 function rollDice() {

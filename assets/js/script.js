@@ -1,6 +1,6 @@
 $(document).ready(function () {
     if (window.location.pathname !== "/dice-count/index.html") {
-  window.location.href = "https://andiskrams.github.io/dice-count/";
+  window.location.assign("https://andiskrams.github.io/dice-count/");
 }
   //dice range
   $("#total-dices").text($("#dicesRange").val());

@@ -21,6 +21,7 @@ function start() {
     }
   });
 }
+
 // Function to roll the dices and display results
 function rollDice() {
   let dices = []; // Array to hold the random dice values

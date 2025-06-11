@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   //dice range
   $("#total-dices").text($("#dicesRange").val());
   $("#dicesRange").on("input", function () {
@@ -139,7 +140,6 @@ function rollDice() {
       $("#result-text>span").css("color", activeColor);
       updateScore("correct"); // Update the correct score
       $("#question").text("Roll the dice to start again.");
-      console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     } else {
       $("#result-text").html(`Incorrect! ${resultText}`);
@@ -149,7 +149,6 @@ function rollDice() {
       $("#result-text>span").css("color", activeColor);
       updateScore("incorrect");
       $("#question").text("Roll the dice to start again.");
-      console.log(`User answer: ${userAnswer}, Correct answer: ${sum}`);
       return start();
     }
   }
